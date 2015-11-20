@@ -116,3 +116,18 @@ it should look something like below:
     }
 
 Restart the nginx, now you should be ready to go!
+
+SQL Installation
+----------------
+
+Import the install/install.sql script in your database.
+
+The default database settings are:
+	host		localhost
+	database	iut_zend
+	username	root
+	password	root
+
+You can edit the settings in config/autoload/local.php and config/autoload/global.php.
+
+
