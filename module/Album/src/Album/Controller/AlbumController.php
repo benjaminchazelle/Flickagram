@@ -12,6 +12,15 @@
  {
      public function indexAction()
      {
+		 
+		//$this->layout()->setVariable('hasIdentity', $this->getServiceLocator()->get('AuthService')->hasIdentity());
+/*
+        if (! $this->getServiceLocator()
+                 ->get('AuthService')->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+*/
+		
          return new ViewModel(array(
              'albums' => $this->getAlbumTable()->fetchAll(),
          ));

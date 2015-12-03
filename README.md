@@ -131,3 +131,9 @@ The default database settings are:
 You can edit the settings in config/autoload/local.php and config/autoload/global.php.
 
 
+Login
+-----
+
+By default, you can log to the application with :
+	username	root
+	password	root

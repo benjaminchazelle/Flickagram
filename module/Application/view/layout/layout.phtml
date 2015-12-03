@@ -38,8 +38,14 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+
+						<?php if($this->url() != "/auth") { ?>
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                    </ul>
+						<?php } ?>
+						<?php if($hasIdentity) { ?>
+                        <li class="active"><a href="/auth/logout"><?php echo $this->translate('Logout') ?></a></li>
+						<?php } ?>
+				 </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
