@@ -135,5 +135,11 @@ Login
 -----
 
 By default, you can log to the application with :
-    username    root
-    password    root
+    username    alice
+    password    alice
+	
+	or
+	
+    username    bob
+    password    bob
+	
