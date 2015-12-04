@@ -20,9 +20,14 @@
             return $this->redirect()->toRoute('login');
         }
 */
-		
+
+		// print_r( $this->getServiceLocator()->get('AuthService'));
+		//exit;
+
+
          return new ViewModel(array(
-             'albums' => $this->getAlbumTable()->fetchAll(),
+			  'data' => $this->getServiceLocator()->get('AuthService'),
+             'albums' => $this->getAlbumTable()->fetchAll($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id),
          ));
      }
 
@@ -69,6 +74,13 @@
              ));
          }
 
+		 if(!$album) {
+             return $this->redirect()->toRoute('album', array(
+                 'action' => 'add'
+             ));
+		 }
+		 // var_dump($album);
+		 
          $form  = new AlbumForm();
          $form->bind($album);
          $form->get('submit')->setAttribute('value', 'Edit');
@@ -95,9 +107,15 @@
      public function deleteAction()
      {
          $id = (int) $this->params()->fromRoute('id', 0);
+		 $album = $this->getAlbumTable();
+
          if (!$id) {
              return $this->redirect()->toRoute('album');
          }
+		 
+		 if(!$album->getAlbum($id))
+             return $this->redirect()->toRoute('album');
+
 
          $request = $this->getRequest();
          if ($request->isPost()) {
@@ -105,7 +123,7 @@
 
              if ($del == 'Yes') {
                  $id = (int) $request->getPost('id');
-                 $this->getAlbumTable()->deleteAlbum($id);
+                 $album->deleteAlbum($id);
              }
 
              // Redirect to list of albums
@@ -114,7 +132,7 @@
 
          return array(
              'id'    => $id,
-             'album' => $this->getAlbumTable()->getAlbum($id)
+             'album' => $album->getAlbum($id)
          );
      }
 	 
@@ -125,6 +143,7 @@
          if (!$this->albumTable) {
              $sm = $this->getServiceLocator();
              $this->albumTable = $sm->get('Album\Model\AlbumTable');
+			 $this->albumTable->__setUser($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id);
          }
          return $this->albumTable;
      }

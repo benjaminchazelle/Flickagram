@@ -30,6 +30,7 @@ class Module
 		$auth = $sm->get('AuthService');
 		
 		$e->getViewModel()->setVariable('hasIdentity', $auth->hasIdentity());
+
 		
         $eventManager->attach(MvcEvent::EVENT_ROUTE, function($e) use ($list, $auth) {			
 			
@@ -48,6 +49,10 @@ class Module
                 } else {
                     // User is authenticated
                     if ($auth->hasIdentity()) {
+		// $id = $this->UserAuthentication()->getIdentity()->getId();				
+		// var_dump(($auth->getIdentity()));
+		// exit;
+						
                         return;
                     } else {
                         // Redirect to the user login page, as an example

@@ -79,7 +79,10 @@ class AuthController extends AbstractActionController
                     $this->flashmessenger()->addMessage($message);
                 }
 
-                if ($result->isValid()) {
+                if ($result->isValid()) {  
+					
+					$userInfo = $this->getAuthService()->getAdapter()->getResultRowObject(null, 'password');  
+					
                     $redirect = 'success';
                     //check if it has rememberMe :
                     if ($request->getPost('rememberme') == 1 ) {
@@ -89,7 +92,8 @@ class AuthController extends AbstractActionController
                         $this->getAuthService()->setStorage($this->getSessionStorage());
                     }
                     $this->getAuthService()->setStorage($this->getSessionStorage());
-                    $this->getAuthService()->getStorage()->write($request->getPost('username'));
+                    // $this->getAuthService()->getStorage()->write($request->getPost('username'));
+                    $this->getAuthService()->getStorage()->write($userInfo);
                 }
             }
         }

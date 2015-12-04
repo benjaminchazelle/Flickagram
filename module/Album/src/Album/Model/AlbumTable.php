@@ -7,26 +7,39 @@
  class AlbumTable
  {
      protected $tableGateway;
+	 
+	 protected $user_id;
 
      public function __construct(TableGateway $tableGateway)
      {
          $this->tableGateway = $tableGateway;
+         $this->user_id = -1;
      }
 
-     public function fetchAll()
+     public function fetchAll($user_id)
      {
-         $resultSet = $this->tableGateway->select();
+         $resultSet = $this->tableGateway->select("owner = ".$this->user_id);
          return $resultSet;
      }
+	 
+	 public function __setUser($uid) {
+		 $this->user_id = $uid;
+	 }
+	 /*
+	 public function isMine($user_id, $album_id) {
+         $resultSet = $this->tableGateway->select("owner = ".$user_id);
+		var_dump($resultSet);
+	 }*/
 
      public function getAlbum($id)
      {
+		// $this->isMine();
          $id  = (int) $id;
-         $rowset = $this->tableGateway->select(array('id' => $id));
+         $rowset = $this->tableGateway->select(array('id' => $id, 'owner' => $this->user_id));
          $row = $rowset->current();
-         if (!$row) {
+        /* if (!$row) {
              throw new \Exception("Could not find row $id");
-         }
+         }*/
          return $row;
      }
 
@@ -35,6 +48,7 @@
          $data = array(
              'artist' => $album->artist,
              'title'  => $album->title,
+             'owner'  => $this->user_id,
          );
 
          $id = (int) $album->id;
