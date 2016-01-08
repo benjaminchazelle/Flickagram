@@ -34,14 +34,16 @@ If you use Apache server, add a virtual host at the end of the httpd.conf, it sh
     </VirtualHost>
 
 
-### SQL Installation
+### SQL installation
 
 Import the install/install.sql script in your database.
+
+### Database connection configuration
 
 Set the database connection informations (host, schema, username, password) by editing config/autoload/local.php and config/autoload/global.php.
 
 
-### Let's play
+### Let's play !
 
 By default, you can log to the application with :
 
@@ -52,5 +54,4 @@ By default, you can log to the application with :
 	
     username:    bob
     password:    bob
-	
 	
