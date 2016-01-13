@@ -16,22 +16,22 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `album`
+-- Structure de la table `restaurant`
 --
 
-CREATE TABLE IF NOT EXISTS `album` (
+CREATE TABLE IF NOT EXISTS `restaurant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `artist` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `owner` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Contenu de la table `album`
+-- Contenu de la table `restaurant`
 --
 
-INSERT INTO `album` (`id`, `artist`, `title`, `owner`) VALUES
+INSERT INTO `restaurant` (`id`, `artist`, `name`, `owner`) VALUES
 (1, 'The  Military  Wives', 'In  My  Dreams', 1),
 (2, 'Adele', '21', 1),
 (3, 'Bruce  Springsteen', 'Wrecking Ball (Deluxe)', 1),
