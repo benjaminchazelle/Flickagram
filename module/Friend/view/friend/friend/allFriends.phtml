@@ -1,0 +1,42 @@
+ <?php
+ // module/Friend/view/friend/friend/index.phtml:
+
+ $title = 'My friends';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+ <table class="table">
+ <tr>
+     <th>Nom</th>
+ </tr>
+ <?php foreach ($friends as $friend) : ?>
+ <tr>
+     <td>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'index', 'id' => $friend->id));?>"><?php echo $friend->real_name; ?></a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+ 
+  <table class="table">
+ <tr>
+     <th>Nom</th>
+     <th>Action</th>
+ </tr>
+ <?php foreach ($requests as $request) : ?>
+ <tr>
+	 <td>
+		<?php echo $request->real_name; ?>
+	 </td>
+     <td>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'add', 'id' => $request->id));?>">Accepter</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+ 
+ 

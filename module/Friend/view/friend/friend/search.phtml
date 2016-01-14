@@ -1,0 +1,47 @@
+ <?php
+ // module/Restaurant/view/restaurant/restaurant/edit.phtml:
+
+ $title = 'Search a friend';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+ 
+ <?php
+ $form = $this->form;
+ $form->setAttribute('action', $this->url(
+     'friend',
+     array(
+         'action' => 'search'
+     )
+ ));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formInput($form->get('name'));
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();
+ 
+ ?>
+ 
+ 
+  <table class="table">
+ <tr>
+     <th>Name</th>
+     <th>Address</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($users as $user) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($user["id"]);?></td>
+     <td><?php echo $this->escapeHtml($user["real_name"]);?></td>
+     <td>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'edit', 'id' => $user["id"]));?>">Edit</a>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'delete', 'id' => $user["id"]));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>

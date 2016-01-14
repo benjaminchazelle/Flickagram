@@ -1,0 +1,42 @@
+ <?php
+ 
+
+ if($exists) {
+ var_dump($friend);
+ var_dump($restaurants);
+ 
+ 
+ echo "lien d'ajout / acceptation";
+ }
+ else {
+	 
+ }
+ // module/Friend/view/friend/friend/index.phtml:
+/*
+ $title = 'My friends';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('friend', array('action'=>'add'));?>">Add new friend</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Name</th>
+     <th>Address</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($friends as $friend) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($friend->name);?></td>
+     <td><?php echo $this->escapeHtml($friend->address);?></td>
+     <td>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'edit', 'id' => $friend->id));?>">Edit</a>
+         <a href="<?php echo $this->url('friend',
+             array('action'=>'delete', 'id' => $friend->id));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach;*/ ?>
+ </table>

@@ -11,6 +11,7 @@ return array(
         'Application',
         'Restaurant',
         'Sign',
+        'Friend',
 		'SanAuth'
     ),
 
