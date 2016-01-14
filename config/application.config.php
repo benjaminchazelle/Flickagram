@@ -10,6 +10,7 @@ return array(
     'modules' => array(
         'Application',
         'Restaurant',
+        'Sign',
 		'SanAuth'
     ),
 

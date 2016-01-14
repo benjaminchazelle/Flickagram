@@ -1,0 +1,105 @@
+ <?php
+ // module/Sign/view/sign/sign/add.phtml:
+
+ $title = 'Ajouter un nouveau sign';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ 
+var_dump($success);
+ $form->setAttribute('action', $this->url('sign', array('action' => 'index')));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+ echo $this->formRow($form->get('real_name'));
+ echo $this->formRow($form->get('email'));
+ echo $this->formRow($form->get('password'));
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();
+
+  // echo $this->formElementErrors($form->get("mark"), array('class' => "some_class", 'message' => "errormessage"));
+ ?>
+ 
+
+ <!--
+<form class="form-horizontal">
+<div class="row">
+<div class="col-md-6">
+<div class="bs-callout bs-callout-primary">
+  <div class="apanel-body">
+  
+
+
+  <div class="form-group">
+    <label for="field_name" class="col-sm-3 control-label">Nom</label>
+    <div class="col-sm-9">
+      <input type="text" name="name" class="form-control" id="field_name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="field_comment" class="col-sm-3 control-label">Commentaire</label>
+    <div class="col-sm-9">
+      <textarea id="field_comment" name="comment" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="nothing" class="col-sm-3 control-label">Note</label>
+    <div class="col-sm-9">
+		<input type="hidden" name="mark" value="3">
+		<div class="btn-group" role="group" aria-label="...">
+		  <button type="button" name="1" class="mark btn btn-default"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+		  <button type="button" name="2" class="mark btn btn-default"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+		  <button type="button" name="3" class="mark btn btn-default"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+		  <button type="button" name="4" class="mark btn btn-default"> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></button>
+		  <button type="button" name="5" class="mark btn btn-default"> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></button>
+		</div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="nothing" class="col-sm-3 control-label">Addresse</label>
+    <div class="col-sm-9">
+		<p class="form-control-static"><i>Cliquer sur la carte pour localiser le restaurant</i></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default">Ajouter</button>
+    </div>
+  </div>
+  
+
+  
+  </div>
+  </div>
+  
+ </div>
+
+<div class="col-md-6">
+	<input type="hidden" name="address" value="">
+    <div id="map" style="height:335px;width:100%;margin:20px 0;"></div>
+
+	<script>
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 5,
+	streetViewControl: false,
+    center: {lat: 46.70973594407157, lng: 2.197265625},
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+ 
+}
+	</script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+
+
+</div>
+</div>
+</form>
+
+-->

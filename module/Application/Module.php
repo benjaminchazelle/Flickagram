@@ -15,7 +15,7 @@ use Zend\Mvc\Router\Http\RouteMatch;
 
 class Module
 {
-	protected $whitelist = array('login','login/process');
+	protected $whitelist = array('login', 'login/process', "sign", "sign/success");
 	
     public function onBootstrap(MvcEvent $e)
     {
@@ -43,15 +43,32 @@ class Module
             } else {
                 // Route is whitelisted
                 $name = $match->getMatchedRouteName();
-
+				
                 if (in_array($name, $list)) {
-                    return;
+                 
+					if($auth->hasIdentity() && $name != 'login/process') {
+						
+                        $router = $e->getRouter();
+                        $url = $router->assemble(array(), array(
+                            'name' => 'home'
+                        ));
+                        $response = $e->getResponse();
+                        $response->getHeaders()->addHeaderLine('Location', $url);
+                        $response->setStatusCode(302);
+                        return $response;
+					}
+					else {
+						return;
+					}
+					
                 } else {
                     // User is authenticated
-                    if ($auth->hasIdentity()) {
+                    if ($auth->hasIdentity() && $name != 'auth/logout') {
 		// $id = $this->UserAuthentication()->getIdentity()->getId();				
 		// var_dump(($auth->getIdentity()));
 		// exit;
+		
+		// var_dump($name);exit;
 						
                         return;
                     } else {

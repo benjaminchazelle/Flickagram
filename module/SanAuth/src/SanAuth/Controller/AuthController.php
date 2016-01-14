@@ -70,7 +70,7 @@ class AuthController extends AbstractActionController
             if ($form->isValid()) {
                 //check authentication...
                 $this->getAuthService()->getAdapter()
-                                       ->setIdentity($request->getPost('username'))
+                                       ->setIdentity($request->getPost('email'))
                                        ->setCredential($request->getPost('password'));
 
                 $result = $this->getAuthService()->authenticate();
