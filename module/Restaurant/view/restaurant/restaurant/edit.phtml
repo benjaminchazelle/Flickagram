@@ -1,29 +1,95 @@
- <?php
- // module/Restaurant/view/restaurant/restaurant/edit.phtml:
+<?php
+ // module/Restaurant/view/restaurant/restaurant/add.phtml:
 
- $title = 'Edit restaurant';
  $this->headTitle($title);
  ?>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
-
  <?php
- $form = $this->form;
- $form->setAttribute('action', $this->url(
-     'restaurant',
-     array(
-         'action' => 'edit',
-         'id'     => $this->id,
-     )
- ));
- $form->prepare();
-
- echo $this->form()->openTag($form);
- echo $this->formHidden($form->get('id'));
- echo $this->formRow($form->get('name'));
- echo $this->formRow($form->get('address'));
- echo $this->formRow($form->get('comment'));
- echo $this->formRow($form->get('mark'));
- echo $this->formSubmit($form->get('submit'));
- echo $this->form()->closeTag();
  
+ // var_dump($form->get('mark'));
+ $form->setAttribute('action', $this->url('restaurant', array('action' => 'add', 'class'=>'form-horizontal')));
+ $form->prepare();
+  
+   echo $this->form()->openTag($form);
+   echo $this->formHidden($form->get('id'));
+   
  ?>
+ 
+
+ 
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="bs-callout bs-callout-primary">
+			<div class="apanel-body">
+			
+				
+
+				<div class="form-group">
+					<?php	echo $this->formElementErrors($form->get("name"), array('class' => "error")) ?>
+					<label for="field_name" class="col-sm-3 control-label">Nom</label>
+					<div class="col-sm-9">
+						
+						<?php	echo $this->formInput($form->get('name')); ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<?php	echo $this->formElementErrors($form->get("comment"), array('class' => "error")) ?>
+					<label for="field_comment" class="col-sm-3 control-label">Commentaire</label>
+					<div class="col-sm-9">
+						<?php	echo $this->formTextarea($form->get('comment')); ?>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<?php	echo $this->formElementErrors($form->get("mark"), array('class' => "error")) ?>
+					<label for="nothing" class="col-sm-3 control-label">Note</label>
+					<div class="col-sm-9">
+
+						<div class="btn-group star-group" role="group" aria-label="...">
+							<?php	echo $this->formHidden($form->get('mark')); ?>
+							<button type="button" name="1" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 1) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+							<button type="button" name="2" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 2) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+							<button type="button" name="3" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 3) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+							<button type="button" name="4" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 4) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+							<button type="button" name="5" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 5) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<?php	echo $this->formElementErrors($form->get("address"), array('class' => "error")) ?>
+					<label for="nothing" class="col-sm-3 control-label">Addresse</label>
+					<div class="col-sm-9">
+						<?php	echo $this->formInput($form->get('address')); ?>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<?php	echo $this->formSubmit($form->get('submit')); ?>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-md-6">
+	
+		<input type="hidden" name="search" value="">
+
+		<input id="pac-input" class="controls" type="text" placeholder="Entrez une adresse">
+
+		<div id="map" style="height:325px;width:100%;margin:20px 0;"></div>
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places"></script>
+
+	</div>
+</div>
+
+
+<?php
+ echo $this->form()->closeTag();
+?>

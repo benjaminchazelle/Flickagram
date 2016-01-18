@@ -1,26 +1,36 @@
  <?php
  // module/Restaurant/view/restaurant/restaurant/delete.phtml:
 
- $title = 'Delete restaurant';
- $this->headTitle($title);
- ?>
- <h1><?php echo $this->escapeHtml($title); ?></h1>
-
- <p>Are you sure that you want to delete
-     '<?php echo $this->escapeHtml($restaurant->name); ?>' by
-     '<?php echo $this->escapeHtml($restaurant->address); ?>'?
- </p>
- <?php
  $url = $this->url('restaurant', array(
      'action' => 'delete',
      'id'     => $this->id,
  ));
  ?>
- <form action="<?php echo $url; ?>" method="post">
- <div>
-     <input type="hidden" name="id" value="<?php echo (int) $restaurant->id; ?>" />
-     <input type="submit" name="del" value="Yes" />
-     <input type="submit" name="del" value="No" />
- </div>
- </form>
  
+
+ 
+  
+ <form action="<?php echo $url; ?>" method="post">
+
+	 <input type="hidden" name="id" value="<?php echo (int) $restaurant->id; ?>" />
+	 
+	 <div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h1>Supprimer un restaurant</h1>
+			<div class="bs-callout bs-callout-danger">
+				<div class="apanel-body"> 
+					<p>Voulez-vous supprimer votre critique sur le restaurant 
+					 <?php echo $this->escapeHtml($restaurant->name); ?>, 
+					 <?php echo $this->escapeHtml($restaurant->address); ?> ?
+					</p>
+				
+					<input class="btn btn-danger" type="Oui" value="Supprimer" name="del">
+					<input class="btn btn-default" type="Non" value="Annuler" name="del">
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</form>

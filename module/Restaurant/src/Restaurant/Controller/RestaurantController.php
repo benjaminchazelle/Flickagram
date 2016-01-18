@@ -33,16 +33,23 @@
 
     public function addAction()
      {
+		 $view = new ViewModel();
+		 
+		 $view->setVariable("title", "Éditer un restaurant");
+		 
+		 $view->setTemplate('restaurant/restaurant/edit');
+		 
          $form = new RestaurantForm();
-         $form->get('submit')->setValue('Add');
+         $form->get('submit')->setValue('Ajouter');
 
          $request = $this->getRequest();
-         if ($request->isPost()) {
+         if ($request->isPost()) { 
              $restaurant = new Restaurant();
+
              $form->setInputFilter($restaurant->getInputFilter());
              $form->setData($request->getPost());
-
-             if ($form->isValid()) {
+			 
+             if ($form->isValid()) {var_dump($request->getPost());
                  $restaurant->exchangeArray($form->getData());
                  $this->getRestaurantTable()->saveRestaurant($restaurant);
 
@@ -50,12 +57,22 @@
                  return $this->redirect()->toRoute('restaurant');
              }
          }
-         return array('form' => $form);
+		 
+		 $view->setVariable("id", "");
+		 $view->setVariable("form", $form);
+		 
+		 return $view;
      }
 
 
      public function editAction()
      {
+		 $view = new ViewModel();
+		 
+		 $view->setVariable("title", "Éditer un restaurant");
+		 
+		 $view->setTemplate('restaurant/restaurant/edit');
+		 
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
              return $this->redirect()->toRoute('restaurant', array(
@@ -83,7 +100,7 @@
 		 
          $form  = new RestaurantForm();
          $form->bind($restaurant);
-         $form->get('submit')->setAttribute('value', 'Edit');
+         $form->get('submit')->setAttribute('value', 'Éditer');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
@@ -97,11 +114,11 @@
                  return $this->redirect()->toRoute('restaurant');
              }
          }
-
-         return array(
-             'id' => $id,
-             'form' => $form,
-         );
+		 
+		 $view->setVariable("id", $id);
+		 $view->setVariable("form", $form);
+		 
+		 return $view;
      }
 
      public function deleteAction()
@@ -119,9 +136,9 @@
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $del = $request->getPost('del', 'No');
+             $del = $request->getPost('del', 'Non');
 
-             if ($del == 'Yes') {
+             if ($del == 'Oui') {
                  $id = (int) $request->getPost('id');
                  $restaurant->deleteRestaurant($id);
              }
