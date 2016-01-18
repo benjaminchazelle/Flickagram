@@ -16,9 +16,9 @@
          $this->user_id = -1;
      }
 
-     public function fetchAll($user_id)
+     public function fetchAll($id)
      {
-         $resultSet = $this->tableGateway->select("owner = ".$this->user_id);
+         $resultSet = $this->tableGateway->select("owner = ".$id);
          return $resultSet;
      }
 	 

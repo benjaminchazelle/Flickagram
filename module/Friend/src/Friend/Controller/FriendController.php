@@ -52,6 +52,7 @@
 			$view->setVariable("exists", $exists);
 			
 			if($exists) {
+			
 				$view->setVariable("friend", $friend);
 				$view->setVariable("restaurants", $this->getRestaurantTable()->fetchAll($id));
 			}

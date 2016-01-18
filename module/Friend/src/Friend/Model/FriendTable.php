@@ -23,9 +23,10 @@ use Zend\Db\Sql\Where;
          $this->user_id = -1;
      }
 
-     public function fetchAll($user_id)
+     public function fetchAll($id)
      {
-         $resultSet = $this->tableGateway->select("owner = ".$this->user_id);
+	 var_dump($id);
+         $resultSet = $this->tableGateway->select("owner = ".$id);
          return $resultSet;
      }
 	 
@@ -125,7 +126,7 @@ GROUP BY u.id*/
 		$select = new Select;
 		$select->from(array('u' => 'gm_users'));
 
-		$select->columns(array('id', 'real_name'));
+		$select->columns(array('id', 'real_name', 'email'));
 		
 		$where = new Where;
 		$where->equalTo( 'id', $id);
