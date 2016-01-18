@@ -124,3 +124,71 @@ footer {
 .bs-callout-info h4 {
     color: #5bc0de;
 }
+
+ .controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+  display:none;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+
+
+.error {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    line-height: 40px;
+    margin: 10px 0;
+	padding:0;
+    min-height: 40px;
+	list-style: none;
+	background: #f44336 none repeat scroll 0 0;
+    width: 100%;	
+}
+
+.error li {
+    color: white;
+    line-height: 40px;
+    min-height: 100%;
+    padding: 0 10px;
+	margin:0;
+    width: 100%;
+}

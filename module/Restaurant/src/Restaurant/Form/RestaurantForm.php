@@ -10,35 +10,58 @@
      {
          // we want to ignore the name passed
          parent::__construct('restaurant');
+		 
+
+		$this->setAttribute('class', 'form-horizontal');
 
          $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
          ));
+		 
          $this->add(array(
              'name' => 'name',
              'type' => 'Text',
+			'attributes' => array(
+				'id'  => 'field_name',
+				'class'  => 'form-control',
+			),
              'options' => array(
                  'label' => 'Name',
+				
              ),
          ));
+		 
+		 
+
          $this->add(array(
              'name' => 'address',
              'type' => 'Text',
+			'attributes' => array(
+				'id'  => 'field_address',
+				'class'  => 'form-control',
+			),
              'options' => array(
-                 'label' => 'Address',
+                 'label' => 'address',
              ),
          ));
           $this->add(array(
              'name' => 'comment',
-             'type' => 'Text',
+             'type' => 'Textarea',
+			'attributes' => array(
+				'id'  => 'field_comment',
+				'class'  => 'form-control',
+			),
              'options' => array(
                  'label' => 'Comment',
              ),
          ));
           $this->add(array(
              'name' => 'mark',
-             'type' => 'Text',
+             'type' => 'Hidden',
+			'attributes' => array(
+				'id'  => 'field_mark',
+			),
              'options' => array(
                  'label' => 'Mark',
              ),
@@ -47,8 +70,9 @@
              'name' => 'submit',
              'type' => 'Submit',
              'attributes' => array(
-                 'value' => 'Go',
+                 'value' => 'Ajouter',
                  'id' => 'submitbutton',
+                 'class' => 'btn btn-default',
              ),
          ));
      }
