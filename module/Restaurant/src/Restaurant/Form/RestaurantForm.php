@@ -40,6 +40,7 @@
 			'attributes' => array(
 				'id'  => 'field_address',
 				'class'  => 'form-control',
+				'placeholder'  => 'Utilisez la carte pour localiser le restaurant',
 			),
              'options' => array(
                  'label' => 'address',
@@ -58,7 +59,7 @@
          ));
           $this->add(array(
              'name' => 'mark',
-             'type' => 'Hidden',
+             'type' => 'Text',
 			'attributes' => array(
 				'id'  => 'field_mark',
 			),
@@ -72,7 +73,7 @@
              'attributes' => array(
                  'value' => 'Ajouter',
                  'id' => 'submitbutton',
-                 'class' => 'btn btn-default',
+                 'class' => 'btn btn-primary',
              ),
          ));
      }

@@ -1,20 +1,17 @@
- <?php
+<?php
  // module/Restaurant/view/restaurant/restaurant/add.phtml:
 
- $title = 'Ajouter un nouveau restaurant';
  $this->headTitle($title);
  ?>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
  <?php
  
  // var_dump($form->get('mark'));
-
  $form->setAttribute('action', $this->url('restaurant', array('action' => 'add', 'class'=>'form-horizontal')));
  $form->prepare();
-
-
   
    echo $this->form()->openTag($form);
+   echo $this->formHidden($form->get('id'));
  ?>
  
 
