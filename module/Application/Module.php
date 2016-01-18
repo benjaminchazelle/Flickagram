@@ -15,7 +15,7 @@ use Zend\Mvc\Router\Http\RouteMatch;
 
 class Module
 {
-	protected $whitelist = array('login', 'login/process', "sign", "sign/success");
+	protected $whitelist = array('login', 'login/process', "sign", "signed", "sign/success");
 	
     public function onBootstrap(MvcEvent $e)
     {

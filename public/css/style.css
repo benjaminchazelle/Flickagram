@@ -22,7 +22,7 @@ a, a:hover{
 	color:#009688;
 }
 
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:active {
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:active , .navbar-inverse .navbar-nav > .active > a:focus {
 	background: none;
 	box-shadow: none;
 }

@@ -19,30 +19,57 @@
              'name' => 'email',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Email',
+                 'label' => '',
              ),
+			'attributes' => array(
+				'id'  => 'exampleInputEmail1',
+				'class'  => 'form-control',
+				'placeholder'  => 'E-Mail',
+			),
          ));
          $this->add(array(
              'name' => 'password',
              'type' => 'password',
              'options' => array(
-                 'label' => 'Password',
+                 'label' => '',
              ),
+			'attributes' => array(
+				'id'  => 'exampleInputPassword1',
+				'class'  => 'form-control',
+				'placeholder'  => 'Mot de passe',
+			),
+         ));
+          $this->add(array(
+             'name' => 'repassword',
+             'type' => 'password',
+             'options' => array(
+                 'label' => '',
+			),
+			'attributes' => array(
+				'id'  => 'exampleInputPassword2',
+				'class'  => 'form-control',
+				'placeholder'  => 'Retaper-le',
+			),
          ));
            $this->add(array(
              'name' => 'real_name',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Real name',
+                 'label' => '',
              ),
+			'attributes' => array(
+				'id'  => 'exampleInputNom',
+				'class'  => 'form-control',
+				'placeholder'  => 'Nom',
+			),
          ));
          $this->add(array(
              'name' => 'submit',
              'type' => 'Submit',
-             'attributes' => array(
-                 'value' => 'Go',
-                 'id' => 'submitbutton',
-             ),
+			'attributes' => array(
+				'class'  => 'btn btn-primary',
+				'value'  => 'S\'inscrire',
+			),
          ));
      }
  }

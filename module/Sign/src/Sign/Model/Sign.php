@@ -74,6 +74,22 @@
                      ),
                  ),
              ));
+             $inputFilter->add(array(
+                 'name'     => 'repassword',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+						array(
+							'name'    => 'Identical',
+							'options' => array(
+								'token' => 'password',
+							),
+						),
+                 ),
+             ));
 			 
              $inputFilter->add(array(
                  'name'     => 'real_name',

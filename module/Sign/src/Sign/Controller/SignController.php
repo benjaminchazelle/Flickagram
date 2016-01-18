@@ -14,14 +14,15 @@
 
     public function indexAction()
      {
+
 		 $success = -1;
 		 
          $form = new SignForm();
-         $form->get('submit')->setValue('Add');
+
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-			 
+			
 
 			 /*
 			 // $this->getSignTable()->
@@ -34,12 +35,10 @@
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
-
-				 if(is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]))) {
-					 
-					 $success = 0;
-				 }
-				 else {
+				 
+				$success = 0;
+ 
+				 if(!is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]))) {
 				 
 				 
 					 $sign->exchangeArray($form->getData());
@@ -47,6 +46,7 @@
 
 					 $success = 1;
 					 // Redirect to list of signs
+					 $this->redirect()->toRoute('signed');
 				 }
 
              }

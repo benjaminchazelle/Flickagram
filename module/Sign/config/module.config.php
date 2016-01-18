@@ -23,6 +23,16 @@
                      ),
                  ),
              ),
+			'signed' => array(
+				'type'    => 'Segment',
+				'options' => array(
+					'route' => '/signed',
+					'defaults' => array(
+						'controller' => 'Sign\Controller\Sign',
+						'action'     => 'success',
+					),
+				),
+			),
          ),
      ),
 
