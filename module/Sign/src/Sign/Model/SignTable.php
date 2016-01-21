@@ -57,7 +57,7 @@
     public function getSignByNickname($nickname)
      {
 
-         $rowset = $this->tableGateway->select(array('real_name' => $nickname));
+         $rowset = $this->tableGateway->select(array('nickname' => $nickname));
          $row = $rowset->current();
 
          return $row;
@@ -69,7 +69,7 @@
              'id' => 0,
              'email' => $sign->email,
              'password'  => md5($sign->password),
-             'real_name'  => $sign->real_name,
+             'nickname'  => $sign->nickname,
          );
 
          $id = (int) $sign->id;

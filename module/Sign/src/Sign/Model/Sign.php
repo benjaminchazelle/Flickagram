@@ -12,14 +12,14 @@
      public $id;
      public $email;
      public $password;
-     public $real_name;
+     public $nickname;
 
      public function exchangeArray($data)
      {
          $this->id     = (!empty($data['id'])) ? $data['id'] : null;
          $this->email = (!empty($data['email'])) ? $data['email'] : null;
          $this->password  = (!empty($data['password'])) ? $data['password'] : null;
-         $this->real_name  = (!empty($data['real_name'])) ? $data['real_name'] : null;
+         $this->nickname  = (!empty($data['nickname'])) ? $data['nickname'] : null;
      }
 	 
      public function getArrayCopy()
@@ -92,7 +92,7 @@
              ));
 			 
              $inputFilter->add(array(
-                 'name'     => 'real_name',
+                 'name'     => 'nickname',
                  'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),

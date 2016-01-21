@@ -52,7 +52,7 @@
 			),
          ));
            $this->add(array(
-             'name' => 'real_name',
+             'name' => 'nickname',
              'type' => 'Text',
              'options' => array(
                  'label' => '',

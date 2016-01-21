@@ -31,7 +31,7 @@
 			<div class="panel-body">
 
 				<div class="tile-title">
-					<b><?php echo $this->escapeHtml($flick["name"]);?> <a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $flick["real_name"]));?>" >@<?php echo $this->escapeHtml($flick["real_name"]);?></a></b>
+					<b><?php echo $this->escapeHtml($flick["name"]);?> <a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $flick["nickname"]));?>" >@<?php echo $this->escapeHtml($flick["nickname"]);?></a></b>
 					<div class="tile-mark">
 						<?php
 						for($i=1; $i <= 5; $i++){
@@ -80,7 +80,7 @@
 				
 				<div id="friendlist">
 					<?php foreach ($friends as $friend) : ?>
-						<div><a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $friend->real_name));?>">@<?php echo $friend->real_name;?></a></div>
+						<div><a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $friend->nickname));?>">@<?php echo $friend->nickname;?></a></div>
 					<?php endforeach; ?>
 				</div>
 

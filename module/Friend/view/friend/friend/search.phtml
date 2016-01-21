@@ -34,9 +34,9 @@
 			<td>
 				<?php 
 					if($user["friendship"] == 0)
-						echo "@" . $user["real_name"];
+						echo "@" . $user["nickname"];
 					else
-						echo '<a href="/user/'.$user["real_name"].'">@'.$user["real_name"].'</a>';
+						echo '<a href="/user/'.$user["nickname"].'">@'.$user["nickname"].'</a>';
 				?>
 			</td>
 			<td>
@@ -44,7 +44,7 @@
 					if($user["friendship"] == 0)
 						echo '<a class="btn btn-primary" href="/friend/add/'. $user["id"] .'" role="button" style="float:right;">Ajouter aux amis</a>';
 					else
-						echo '<a class="btn btn-primary" href="/user/'. $user["real_name"] .'" role="button" style="float:right;">Voir le profil</a>';
+						echo '<a class="btn btn-primary" href="/user/'. $user["nickname"] .'" role="button" style="float:right;">Voir le profil</a>';
 				?>
 				
 			
@@ -72,7 +72,7 @@
 				
 				<div id="friendlist">
 					<?php foreach ($friends as $friend) : ?>
-						<div><a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $friend->real_name));?>">@<?php echo $friend->real_name;?></a></div>
+						<div><a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $friend->nickname));?>">@<?php echo $friend->nickname;?></a></div>
 					<?php endforeach; ?>
 				</div>
 

@@ -41,24 +41,24 @@ use Zend\Db\Sql\Where;
 	 
 	 public function searchByNickname($name) {
 		 /*
-SELECT id, real_name, MAX(state) 'friendship' FROM gm_users u
+SELECT id, nickname, MAX(state) 'friendship' FROM gm_users u
 LEFT JOIN gm_friends f ON u.id = f.user_one OR u.id = f.user_two
-WHERE UCASE(real_name) LIKE "%LI%"
+WHERE UCASE(nickname) LIKE "%LI%"
 GROUP BY u.id*/
 
 		$select = new Select;
 
 // $subSelect = new Select();
-		$select->from(array('u' => 'gm_users'))->columns(array('id', 'real_name', 'friendship' => new Expression('MAX(state)')));
+		$select->from(array('u' => 'gm_users'))->columns(array('id', 'nickname', 'friendship' => new Expression('MAX(state)')));
 
-		// $select->from(array('u' => 'gm_users'), array('MAX(state)', 'UCASE(real_name)') );
+		// $select->from(array('u' => 'gm_users'), array('MAX(state)', 'UCASE(nickname)') );
 		
-		// $select->columns(array('id' => 'id', 'real_name' => 'real_name', 'friendship' => 'friendship'));
+		// $select->columns(array('id' => 'id', 'nickname' => 'nickname', 'friendship' => 'friendship'));
 		
 		$select->join(array('f' => 'gm_friends'),	'u.id = f.user_one OR u.id = f.user_two', array(), 'left');   
 
 		$where = new Where;
-		$where->like( new Expression('UCASE(real_name)'), '%'.strtoupper($name).'%' );
+		$where->like( new Expression('UCASE(nickname)'), '%'.strtoupper($name).'%' );
 		$where->AND->notEqualTo('id', $this->user_id);
 		
 		$select->where($where);
@@ -126,7 +126,7 @@ GROUP BY u.id*/
 		$select = new Select;
 		$select->from(array('u' => 'gm_users'));
 
-		$select->columns(array('id', 'real_name', 'email'));
+		$select->columns(array('id', 'nickname', 'email'));
 		
 		$where = new Where;
 		$where->equalTo( 'id', $id);
@@ -184,13 +184,13 @@ GROUP BY u.id*/
 			if($result["u1_id"] != $this->user_id) {
 				
 				$friend->{"id"} = $result["u1_id"];
-				$friend->{"real_name"} = $result["u1_real_name"];
+				$friend->{"nickname"} = $result["u1_nickname"];
 				
 			}
 			else {
 				
 				$friend->{"id"} = $result["u2_id"];
-				$friend->{"real_name"} = $result["u2_real_name"];
+				$friend->{"nickname"} = $result["u2_nickname"];
 				
 			}
 			
@@ -205,10 +205,10 @@ GROUP BY u.id*/
 		$select = new Select;
 		$select->from(array('u' => 'gm_users'));
 
-		$select->columns(array('id', 'real_name', 'email'));
+		$select->columns(array('id', 'nickname', 'email'));
 		
 		$where = new Where;
-		$where->equalTo( 'real_name', $nickname);
+		$where->equalTo( 'nickname', $nickname);
 
 		$select->where($where);
 
@@ -265,13 +265,13 @@ GROUP BY u.id*/
 			if($result["u1_id"] != $this->user_id) {
 				
 				$friend->{"id"} = $result["u1_id"];
-				$friend->{"real_name"} = $result["u1_real_name"];
+				$friend->{"nickname"} = $result["u1_nickname"];
 				
 			}
 			else {
 				
 				$friend->{"id"} = $result["u2_id"];
-				$friend->{"real_name"} = $result["u2_real_name"];
+				$friend->{"nickname"} = $result["u2_nickname"];
 				
 			}
 			
@@ -297,8 +297,8 @@ GROUP BY u.id*/
 		
 		$select->where($where);
 
-		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_real_name' => 'real_name', 'u1_id' => 'id'));     
-		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_real_name' => 'real_name', 'u2_id' => 'id'));     
+		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
+		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));     
 		
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
 		$resultSet = $statement->execute();	
@@ -312,13 +312,13 @@ GROUP BY u.id*/
 			if($result["u1_id"] != $this->user_id) {
 				
 				$friend->{"id"} = $result["u1_id"];
-				$friend->{"real_name"} = $result["u1_real_name"];
+				$friend->{"nickname"} = $result["u1_nickname"];
 				
 			}
 			else {
 				
 				$friend->{"id"} = $result["u2_id"];
-				$friend->{"real_name"} = $result["u2_real_name"];
+				$friend->{"nickname"} = $result["u2_nickname"];
 				
 			}
 			
@@ -346,8 +346,8 @@ GROUP BY u.id*/
 		
 		$select->where($where);
 
-		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_real_name' => 'real_name', 'u1_id' => 'id'));     
-		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_real_name' => 'real_name', 'u2_id' => 'id'));   
+		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
+		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));   
 
 		
 		
@@ -363,13 +363,13 @@ GROUP BY u.id*/
 			if($result["u1_id"] != $this->user_id) {
 				
 				$friend->{"id"} = $result["u1_id"];
-				$friend->{"real_name"} = $result["u1_real_name"];
+				$friend->{"nickname"} = $result["u1_nickname"];
 				
 			}
 			else {
 				
 				$friend->{"id"} = $result["u2_id"];
-				$friend->{"real_name"} = $result["u2_real_name"];
+				$friend->{"nickname"} = $result["u2_nickname"];
 				
 			}
 			

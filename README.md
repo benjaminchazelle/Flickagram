@@ -47,11 +47,11 @@ Set the database connection informations (host, schema, username, password) by e
 
 By default, you can log to the application with :
 
-    username:    alice
+    username:    alice@yopmail.com
     password:    alice
 	
 	or
 	
-    username:    bob
+    username:    bob@yopmail.com
     password:    bob
 	

@@ -28,7 +28,7 @@ use Zend\Db\Sql\Where;
 		$select->columns(array('*'));
 
 
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("real_name"));      
+		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
 		
 		$select->where(array("owner" => $ownerId));
 		
@@ -51,9 +51,9 @@ use Zend\Db\Sql\Where;
 		$select->columns(array('*'));
 
 
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("real_name"));      
+		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
 		
-		$select->where(array("real_name" => $ownerNickname));
+		$select->where(array("nickname" => $ownerNickname));
 		
 		$select->group("id");
 		
@@ -80,7 +80,7 @@ use Zend\Db\Sql\Where;
 		$select->columns(array('*'));
 
 		$select->join(array('fr' => 'gm_friends'),	'fl.owner = fr.user_one OR fl.owner = fr.user_two', array());      
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("real_name"));      
+		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
 		
 		$where = new Where;
 		$or = $where->nest();

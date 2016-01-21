@@ -39,7 +39,7 @@
 				$success = 0;
 				
 				$email_available = !is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]));
-				$nickname_available = !is_object($this->getSignTable()->getSignByNickname($form->getData()["real_name"]));
+				$nickname_available = !is_object($this->getSignTable()->getSignByNickname($form->getData()["nickname"]));
 
 				 if($email_available && $nickname_available) {
 				 
