@@ -30,6 +30,11 @@ class Module
 		$auth = $sm->get('AuthService');
 		
 		$e->getViewModel()->setVariable('hasIdentity', $auth->hasIdentity());
+		
+		if($auth->hasIdentity())
+			$e->getViewModel()->setVariable('currentUserId', $auth->getStorage()->read()->id);
+		else
+			$e->getViewModel()->setVariable('currentUserId', -1);
 
 		
         $eventManager->attach(MvcEvent::EVENT_ROUTE, function($e) use ($list, $auth) {			

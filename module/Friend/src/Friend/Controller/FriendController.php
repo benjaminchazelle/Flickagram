@@ -7,127 +7,89 @@
  use Friend\Model\Friend;          // <-- Add this import
  use Friend\Model\Search;          // <-- Add this import
  use Friend\Form\FriendForm;       // <-- Add this import
- use Restaurant\Model\Restaurant;          // <-- Add this import
- use Restaurant\Form\RestaurantForm;       // <-- Add this import
+ use Flick\Model\Flick;          // <-- Add this import
+ use Flick\Form\FlickForm;       // <-- Add this import
 
  class FriendController extends AbstractActionController
  {
-     public function indexAction()
-     {
-         $id = (int) $this->params()->fromRoute('id', 0);
+	 public function wallAction( ) {
 		 
-		 if($id == $this->getServiceLocator()->get('AuthService')->getStorage()->read()->id)
-			 return $this->redirect()->toRoute('home');
+		 $input = $this->params()->fromRoute('id', 0);
 		 
-		     $view = new ViewModel();
-			 
-			 // $restaurants = $this->getRestaurantTable()->fetchAll($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id);
-			 
-			 // foreach ($restaurants as $restaurant) {
-				 
-				 // var_dump($restaurant);
-				 
-			 // }
-			 
-			 // var_dump(scandir('module/Friend/view/friend/friend/allFriends.phtml'));
-		 // var_dump($this->getServiceLocator()->get('AuthService')->getStorage()->read());
-		 if($id == 0) {
-			 
-			$view->setVariable("friends", $this->getFriendTable()->getFriends());
-			$view->setVariable("requests", $this->getFriendTable()->getRequests());
-			
-			
-			 
-			$view->setTemplate('friend/friend/allFriends');
-
-			 
-			 
-		 }
-		 else {
-			 
-			$friend = $this->getFriendTable()->getUser($id);
-			
-			$exists = is_array($friend);
-			 
-			$view->setVariable("exists", $exists);
-			
-			if($exists) {
-			
-				$view->setVariable("friend", $friend);
-				$view->setVariable("restaurants", $this->getRestaurantTable()->fetchAll($id));
-			}
-			 
-			$view->setTemplate('friend/friend/friend');
-			 
-		 }
 		 
-		return $view;
-		//$this->layout()->setVariable('hasIdentity', $this->getServiceLocator()->get('AuthService')->hasIdentity());
-/*
-        if (! $this->getServiceLocator()
-                 ->get('AuthService')->hasIdentity()){
-            return $this->redirect()->toRoute('login');
-        }
-*/
+		 
+		 $userdata = is_numeric($input) ? $this->getFriendTable()->getUserById($input) : $this->getFriendTable()->getUserByNickname($input);
+		 $userflicks = is_numeric($input) ? $this->getFlickTable()->getFlicksByOwnerId($input) : $this->getFlickTable()->getFlicksByOwnerNickname($input);
+		 
+		 $exists = is_array($userdata);
+		 
+	
 
-		// print_r( $this->getServiceLocator()->get('AuthService'));
-		//exit;
-
-
-		/*
          return new ViewModel(array(
-			 'data' => $this->getServiceLocator()->get('AuthService'),
-             'friends' => $this->getFriendTable()->fetchAll($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id),
-         ));*/
-     }
+			'searchterm' => "",
+				'exists' => $exists,
+				'user' => $userdata,
+				'flicks' => $userflicks,
+				'currentUserId' => $this->getServiceLocator()->get('AuthService')->getStorage()->read()->id,
+				'friends' => $this->getFriendTable()->getFriends(),
+         ));		 
+		 
+	 }
+	 
+	 public function invitationsAction() {
+			
+         return new ViewModel(array(
+			'searchterm' => "",
+				'invitations' => $this->getFriendTable()->getInvitations(),
+				'currentUserId' => $this->getServiceLocator()->get('AuthService')->getStorage()->read()->id,
+				'friends' => $this->getFriendTable()->getFriends(),
+         ));
+		 
+	 }
+	 
+
 	 
 	 
-     public function addAction()
-     {
+     public function addAction() {
          $id = (int) $this->params()->fromRoute('id', 0);
 
-		 if($id == 0) {
-			 $this->redirect()->toRoute('friend');
-		 }
-		 else {
-			 
-			 
-			 if($this->getFriendTable()->setRequest($id))
-				return $this->redirect()->toRoute('friend', array('id'=>$id));
 
 			 
-		 }
+			if($this->getFriendTable()->setRequest($id))
+				return $this->redirect()->toRoute('user', array('id'=>$id));
+
+			 
+		 //return $this->redirect()->toRoute('home');
 		 
 	 }
 	 
 	 public function searchAction() {
 		 
+		 $searchterm = "";
 		 
-        $form = new FriendForm();
+		 $users = array();
+		 
+		$form = new FriendForm();
          $form->get('submit')->setValue('Rechercher');
-
          $request = $this->getRequest();
          if ($request->isPost()) {
              $search = new Search();
              $form->setInputFilter($search->getInputFilter());
              $form->setData($request->getPost());
-
              if ($form->isValid()) {
 				 
-					$users = $this->getFriendTable()->searchByName($form->getData()["name"]);
+					$searchterm = $form->getData()["name"];
+					$users = $this->getFriendTable()->searchByNickname($form->getData()["name"]);
 					
-					 return array(
-						 'form' => $form,
-						 'users' => $users,
-					 );
 
 			 }
-
 		 }
 		 
          return array(
-             'form' => $form,
-			 'users' => array()
+			 'form' => $form,
+             'searchterm' => $searchterm,
+			 'users' => $users,
+				'friends' => $this->getFriendTable()->getFriends(),			 
          );
 	 }
 
@@ -145,16 +107,16 @@
          return $this->friendTable;
      }
 	 
-	  protected $restaurantTable;
+	  protected $flickTable;
 	 
-     public function getRestaurantTable()
+     public function getFlickTable()
      {
-         if (!$this->restaurantTable) {
+         if (!$this->flickTable) {
              $sm = $this->getServiceLocator();
-             $this->restaurantTable = $sm->get('Restaurant\Model\RestaurantTable');
-			 $this->restaurantTable->__setUser($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id);
+             $this->flickTable = $sm->get('Flick\Model\FlickTable');
+			 $this->flickTable->__setUser($this->getServiceLocator()->get('AuthService')->getStorage()->read()->id);
          }
-         return $this->restaurantTable;
+         return $this->flickTable;
      }
  }
  

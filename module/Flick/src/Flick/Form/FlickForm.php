@@ -1,6 +1,6 @@
 <?php 
 
- namespace Restaurant\Form;
+ namespace Flick\Form;
 
  use Zend\Form\Form;
 use Zend\InputFilter\Factory as InputFactory;
@@ -8,12 +8,12 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
- class RestaurantForm extends Form
+ class FlickForm extends Form
  {
      public function __construct($name = null)
      {
          // we want to ignore the name passed
-         parent::__construct('restaurant');
+         parent::__construct('flick');
 		 
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype','multipart/form-data');
@@ -32,7 +32,7 @@ use Zend\InputFilter\InputFilterInterface;
 				'class'  => 'form-control',
 			),
              'options' => array(
-                 'label' => 'Name',
+                 'label' => '',
 				
              ),
          ));
@@ -53,10 +53,10 @@ use Zend\InputFilter\InputFilterInterface;
 			'attributes' => array(
 				'id'  => 'field_address',
 				'class'  => 'form-control',
-				'placeholder'  => 'Utilisez la carte pour localiser le restaurant',
+				'placeholder'  => 'Utilisez la carte pour localiser le flick',
 			),
              'options' => array(
-                 'label' => 'address',
+                 'label' => '',
              ),
          ));
           $this->add(array(
@@ -67,7 +67,7 @@ use Zend\InputFilter\InputFilterInterface;
 				'class'  => 'form-control',
 			),
              'options' => array(
-                 'label' => 'Comment',
+                 'label' => '',
              ),
          ));
           $this->add(array(

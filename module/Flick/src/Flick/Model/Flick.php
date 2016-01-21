@@ -1,6 +1,6 @@
 <?php 
 
- namespace Restaurant\Model;
+ namespace Flick\Model;
 
   use Zend\InputFilter\InputFilter;
  use Zend\InputFilter\InputFilterAwareInterface;
@@ -9,7 +9,7 @@
  
  use Zend\InputFilter\Factory as InputFactory;
 
- class Restaurant
+ class Flick
  {
      public $id;
      public $address;
@@ -39,7 +39,7 @@
          throw new \Exception("Not used");
      }
 
-     public function getInputFilter()
+     public function getInputFilter($uploadRequire=true)
      {
          if (!isset($this->inputFilter)) {
              $inputFilter = new InputFilter();
@@ -54,20 +54,10 @@
 
              $inputFilter->add(array(
                  'name'     => 'address',
-                 'required' => true,
+                 'required' => false,
                  'filters'  => array(
                      array('name' => 'StripTags'),
                      array('name' => 'StringTrim'),
-                 ),
-                 'validators' => array(
-                     array(
-                         'name'    => 'StringLength',
-                         'options' => array(
-                             'encoding' => 'UTF-8',
-                             'min'      => 1,
-                             'max'      => 100,
-                         ),
-                     ),
                  ),
              ));
 
@@ -92,40 +82,13 @@
 			 
              $inputFilter->add(array(
                  'name'     => 'comment',
-                 'required' => true,
+                 'required' => false,
                  'filters'  => array(
                      array('name' => 'StripTags'),
                      array('name' => 'StringTrim'),
-                 ),
-                 'validators' => array(
-                     array(
-                         'name'    => 'StringLength',
-                         'options' => array(
-                             'encoding' => 'UTF-8',
-                             'min'      => 1,
-                             'max'      => 240,
-                         ),
-                     ),
                  ),
              )); 
-             $inputFilter->add(array(
-                 'name'     => 'mark',
-                 'required' => true,
-                 'filters'  => array(
-                     array('name' => 'StripTags'),
-                     array('name' => 'StringTrim'),
-                 ),
-                 'validators' => array(
-                     array(
-                         'name'    => 'StringLength',
-                         'options' => array(
-                             'encoding' => 'UTF-8',
-                             'min'      => 1,
-                             'max'      => 240,
-                         ),
-                     ),
-                 ),
-             ));
+
 			
 	         $inputFilter->add(array(
                  'name'     => 'mark',
@@ -149,7 +112,7 @@
 			$inputFilter->add(
                 $factory->createInput(array(
                     'name'     => 'fileupload',
-                    'required' => true,
+                    'required' => $uploadRequire,
                 ))
             );
 

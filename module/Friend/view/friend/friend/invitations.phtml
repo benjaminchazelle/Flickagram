@@ -1,6 +1,6 @@
-<?php
+ <?php
 
- $title = 'Recherche';
+ $title = 'Invitations';
  $this->headTitle($title);
  ?>
  
@@ -11,7 +11,7 @@
 		<h1>&nbsp;</h1>
 		
 		<ul class="nav nav-pills nav-stacked">
-		  <li role="presentation" class="active"><a href="/invitation">Recherche</a></li>
+		  <li role="presentation" class="active"><a href="/invitations">Invitations</a></li>
 		  <li role="presentation"><a href="/">Timeline</a></li>
 		  <li role="presentation"><a href="/me">Vos flicks</a></li>
 		</ul>
@@ -21,45 +21,29 @@
 
 	<div class="col-md-7">
 	
-		<h1>Recherche</h1>
+		<h1>Mes invitations</h1>
 
 		<table class="table">
 		<?php
-		if(count($users) == 0)
-			echo '<tr><td>Aucun résultat</td></tr>';
-		?>		
-		<?php foreach ($users as $user) :  ?>
+		if(count($invitations) == 0)
+			echo '<tr><td>Vous n\'avez aucune invitation</td></tr>';
+		?>
+		<?php foreach ($invitations as $invitation) : ?>
 
 		<tr>
-			<td>
-				<?php 
-					if($user["friendship"] == 0)
-						echo "@" . $user["real_name"];
-					else
-						echo '<a href="/user/'.$user["real_name"].'">@'.$user["real_name"].'</a>';
-				?>
-			</td>
-			<td>
-				<?php 
-					if($user["friendship"] == 0)
-						echo '<a class="btn btn-primary" href="/friend/add/'. $user["id"] .'" role="button" style="float:right;">Ajouter aux amis</a>';
-					else
-						echo '<a class="btn btn-primary" href="/user/'. $user["real_name"] .'" role="button" style="float:right;">Voir le profil</a>';
-				?>
-				
-			
-			
-			</td>
+			<td>@<?php echo $invitation->real_name; ?></td>
+			<td><a class="btn btn-primary" href="/friend/add/<?php echo $invitation->id; ?>" role="button" style="float:right;">Ajouter aux amis</a></td>
 		</tr>
 		  
 		<?php endforeach; ?>
+		
+
 		</table>
 		
 	</div>
 	<div class="col-md-3">
 
 				<h1>Mes amis </h1>
-
 
 				<form class="form-inline" method="POST" name="friend" action="/search" id="friend">
 					<div class="form-group">
@@ -68,7 +52,7 @@
 					<button type="submit" name="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
-				</form>		
+				</form>	
 				
 				<div id="friendlist">
 					<?php foreach ($friends as $friend) : ?>

@@ -9,8 +9,8 @@ use Friend\Model\Friend;
 use Friend\Model\FriendTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
-use Restaurant\Model\Restaurant;
-use Restaurant\Model\RestaurantTable;
+use Flick\Model\Flick;
+use Flick\Model\FlickTable;
 
 
  class Module implements AutoloaderProviderInterface, ConfigProviderInterface
@@ -50,16 +50,16 @@ use Restaurant\Model\RestaurantTable;
                      return new TableGateway('gm_friends', $dbAdapter, null, $resultSetPrototype);
                  },
 				 
-                 'Restaurant\Model\RestaurantTable' =>  function($sm) {
-                     $tableGateway = $sm->get('RestaurantTableGateway');
-                     $table = new RestaurantTable($tableGateway);
+                 'Flick\Model\FlickTable' =>  function($sm) {
+                     $tableGateway = $sm->get('FlickTableGateway');
+                     $table = new FlickTable($tableGateway);
                      return $table;
                  },
-                 'RestaurantTableGateway' => function ($sm) {
+                 'FlickTableGateway' => function ($sm) {
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
-                     $resultSetPrototype->setArrayObjectPrototype(new Restaurant());
-                     return new TableGateway('gm_restaurants', $dbAdapter, null, $resultSetPrototype);
+                     $resultSetPrototype->setArrayObjectPrototype(new Flick());
+                     return new TableGateway('gm_flicks', $dbAdapter, null, $resultSetPrototype);
                  },
              ),
          );

@@ -12,63 +12,57 @@
  
  
 ?>
-<div class="row">
+		<div class="row">
 
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
+			
+				<div class=" panel panel-default bs-callout bs-callout-primary">
+
+					<div class="panel-body">
+					
+					
 				<h1>Inscription</h1>
 				<?php
-				if($success == 0)
+				if(!$email_available)
 					echo '<div class="alert alert-danger" role="alert">Cette e-mail est déjà utilisée</div>';
+				if(!$nickname_available)
+					echo '<div class="alert alert-danger" role="alert">Ce pseudo est déjà utilisé</div>';
 				?>
 				<div class="form-group">
-					<label for="exampleInputNom">Nom</label>
+					<label for="exampleInputNom">Pseudo </label>
 					<?php echo $this->formInput($form->get('real_name')); ?>
-					<!--<input type="nom" class="form-control" id="exampleInputNom" placeholder="Nom">-->
 				</div>
-			</div>
-			<div class="col-md-4"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+				<div class="form-group">	
+				<i>Composé de lettres ou chiffres uniquement</i>
+				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Adresse mail</label>
 					<?php echo $this->formInput($form->get('email')); ?>
-					<!--<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">-->
-				</div>
-			</div>
-			<div class="col-md-4"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+				</div>				
+				
 				<div class="form-group">
 					<label for="exampleInputPassword1">Mot de passe</label>
 					<?php echo $this->formInput($form->get('password')); ?>
-					<!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">-->
-				</div>
-			</div>
-			<div class="col-md-4"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+				</div>				
+				<div class="form-group">	
+				<i>6 caractères minimum</i>
+				</div>				
 				<div class="form-group">
 					<label for="exampleInputPassword2">Retapez le mot de passe</label>
 					<?php echo $this->formInput($form->get('repassword')); ?>
-					<!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Retaper-le">-->
+				</div>				
+				
+				<?php echo $this->formInput($form->get('submit')); ?>				
+				
+				
 				</div>
+				</div>
+				
 			</div>
 			<div class="col-md-4"></div>
 		</div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-			
-			<?php echo $this->formInput($form->get('submit')); ?>
-			<!--<button type="submit" class="btn btn-primary">S'inscrire</button>-->
-		</div>
-		<div class="col-md-4"></div></div>
+
 <?php
  echo $this->form()->closeTag();
 

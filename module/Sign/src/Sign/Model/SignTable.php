@@ -53,6 +53,15 @@
          }*/
          return $row;
      }
+	 
+    public function getSignByNickname($nickname)
+     {
+
+         $rowset = $this->tableGateway->select(array('real_name' => $nickname));
+         $row = $rowset->current();
+
+         return $row;
+     }
 
      public function saveSign(Sign $sign)
      {

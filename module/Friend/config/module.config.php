@@ -23,6 +23,44 @@
                      ),
                  ),
              ),
+             'user' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/user[/:id]',
+                     'constraints' => array(
+                         'id'     => '[a-zA-Z0-9_-]*',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Friend\Controller\Friend',
+                         'action'     => 'wall',
+                     ),
+                 ),
+             ),
+             'invitations' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/invitations',
+                     'constraints' => array(
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Friend\Controller\Friend',
+                         'action'     => 'invitations',
+                     ),
+                 ),
+             ),
+             'search' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/search',
+                     'constraints' => array(
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Friend\Controller\Friend',
+                         'action'     => 'search',
+                     ),
+                 ),
+             ),
+			 
          ),
      ),
 

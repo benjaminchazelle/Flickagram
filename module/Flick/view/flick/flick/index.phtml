@@ -1,0 +1,88 @@
+ <?php
+
+ $title = 'Timeline';
+ $this->headTitle($title);
+ ?>
+ 
+
+<div class="row">
+	<div class="col-md-2">
+
+		<h1>&nbsp;</h1>
+	
+		<ul class="nav nav-pills nav-stacked">
+		  <li role="presentation" class="active"><a href="/">Timeline</a></li>
+		  <li role="presentation"><a href="/me">Vos flicks</a></li>
+		</ul>
+		
+	
+	</div>
+
+	<div class="col-md-7">
+	
+		 <h1>
+			Les derniers flicks
+			<a class="btn btn-primary" style="float:right;" role="button" href="<?php echo $this->url('flick', array('action'=>'add'));?>">Ajouter un flick</a>
+		</h1>
+
+		<?php foreach ($flicks as $flick) : ?>
+
+		<div class="tile <?php if($currentUserId == $flick["owner"]) echo "tile-mine"; ?> panel panel-default">
+			<div class="panel-body">
+
+				<div class="tile-title">
+					<b><?php echo $this->escapeHtml($flick["name"]);?> <a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $flick["real_name"]));?>" >@<?php echo $this->escapeHtml($flick["real_name"]);?></a></b>
+					<div class="tile-mark">
+						<?php
+						for($i=1; $i <= 5; $i++){
+							if($i <= $flick["mark"])
+								echo "<div class=\"glyphicon glyphicon-star\"></div>";
+							else
+								echo "<div class=\"glyphicon glyphicon-star-empty\"></div>";
+						}
+						?>
+						<div class="tile-control">
+							<a class="btn btn-primary btn-sm" href="<?php echo $this->url('flick', array('action'=>'edit', 'id' => $flick["id"]));?>" role="button">
+								 <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</a>
+							<a class="btn btn-danger btn-sm" href="<?php echo $this->url('flick', array('action'=>'delete', 'id' => $flick["id"]));?>" role="button">
+								 <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<div class="tile-comment"><?php echo $this->escapeHtml($flick["comment"]);?></div>				
+				<img style="width:100%;" src="/assets/<?php echo $this->escapeHtml($flick["fileupload"]);?>" class="img-responsive" alt="Responsive image" />
+				
+				<?php echo !is_null($flick["address"]) ? '<div class="tile-address"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>À ' . $this->escapeHtml($flick["address"]).'</div>' : "";?>
+				
+
+				
+			</div>
+		</div>
+		  
+		<?php endforeach; ?>
+		
+	</div>
+	<div class="col-md-3">
+
+				<h1>Mes amis </h1>
+
+				<form class="form-inline" method="POST" name="friend" action="/search" id="friend">
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" id="exampleInputEmail3" value="<?php echo ($searchterm === 0) ? "" : $searchterm; ?>" placeholder="Chercher quelqu'un">
+					</div>
+					<button type="submit" name="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</form>			
+				
+				<div id="friendlist">
+					<?php foreach ($friends as $friend) : ?>
+						<div><a href="<?php echo $this->url('user', array('action'=>'index', 'id' => $friend->real_name));?>">@<?php echo $friend->real_name;?></a></div>
+					<?php endforeach; ?>
+				</div>
+
+	</div>
+</div>

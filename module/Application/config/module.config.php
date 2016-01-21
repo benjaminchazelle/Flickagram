@@ -17,7 +17,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Restaurant\Controller\Restaurant',
+                        'controller' => 'Flick\Controller\Flick',
                         'action'     => 'index',
                     ),
                 ),

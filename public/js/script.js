@@ -43,6 +43,8 @@ window.onload = function () {
 };
 
 function initMap() {
+	
+document.getElementById('map').style.height = document.getElementById("ref").getBoundingClientRect().height + "px";
   var map = new google.maps.Map(document.getElementById('map'), {
     center:  {lat: 46.70973594407157, lng: 2.197265625},
     zoom: 5,
@@ -50,7 +52,9 @@ function initMap() {
   });
   var input = /** @type {!HTMLInputElement} */(
       document.getElementById('pac-input'));
-  input.style.display = 'block';
+	  
+	  setTimeout(function () {document.getElementById('pac-input').style.opacity=1;}, 1500);
+
   var types = document.getElementById('type-selector');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);

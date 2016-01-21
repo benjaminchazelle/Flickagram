@@ -39,7 +39,7 @@ use Zend\Db\Sql\Where;
 		var_dump($resultSet);
 	 }*/
 	 
-	 public function searchByName($name) {
+	 public function searchByNickname($name) {
 		 /*
 SELECT id, real_name, MAX(state) 'friendship' FROM gm_users u
 LEFT JOIN gm_friends f ON u.id = f.user_one OR u.id = f.user_two
@@ -47,7 +47,6 @@ WHERE UCASE(real_name) LIKE "%LI%"
 GROUP BY u.id*/
 
 		$select = new Select;
-		
 
 // $subSelect = new Select();
 		$select->from(array('u' => 'gm_users'))->columns(array('id', 'real_name', 'friendship' => new Expression('MAX(state)')));
@@ -60,6 +59,7 @@ GROUP BY u.id*/
 
 		$where = new Where;
 		$where->like( new Expression('UCASE(real_name)'), '%'.strtoupper($name).'%' );
+		$where->AND->notEqualTo('id', $this->user_id);
 		
 		$select->where($where);
 		
@@ -77,7 +77,7 @@ GROUP BY u.id*/
 			if($id == $this->user_id)
 				return true;
 		 
-			 $user = $this->getUser($id);
+			 $user = $this->getUserById($id);
 		 
 			if(is_array($user)) {
 				 
@@ -120,7 +120,7 @@ GROUP BY u.id*/
 		 return false;
 	 }
 	 
-     public function getUser($id)
+     public function getUserById($id)
      {
 		 
 		$select = new Select;
@@ -136,7 +136,7 @@ GROUP BY u.id*/
 		
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
 		$resultSet = $statement->execute()->current();	
-		// var_dump($resultSet);
+		
 		if(is_array($resultSet)) {
 			
 			$select = new Select;
@@ -173,7 +173,7 @@ GROUP BY u.id*/
 			
 		}
 		else {
-			return false;
+			return null;
 		}
 		$friends = array();
 
@@ -198,10 +198,90 @@ GROUP BY u.id*/
 			
 		}
 
-         // return $friends;
+     }
+     public function getUserByNickname($nickname)
+     {
+		 
+		$select = new Select;
+		$select->from(array('u' => 'gm_users'));
+
+		$select->columns(array('id', 'real_name', 'email'));
+		
+		$where = new Where;
+		$where->equalTo( 'real_name', $nickname);
+
+		$select->where($where);
+
+		
+		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
+		$resultSet = $statement->execute()->current();	
+		
+		$id = $resultSet["id"];
+		
+		if(is_array($resultSet)) {
+			
+			$select = new Select;
+			$select->from(array('f' => 'gm_friends'));
+			
+			$select->columns(array('*'));
+			
+			$where = new Where;
+			$or = $where->nest();
+			$or->equalTo( 'user_one', $this->user_id);
+			$or->AND->equalTo( 'user_two', $id);
+			$or->unnest();
+			
+			$_or = $where->OR->nest();
+			$_or->equalTo( 'user_one', $id);
+			$_or->AND->equalTo( 'user_two', $this->user_id);
+			$_or->unnest();
+			
+			$select->where($where);
+			
+			$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
+			$resultSet2 = $statement->execute()->current();	
+			
+			if(is_array($resultSet2)) {
+					$resultSet["i_am_adder"] = $this->user_id == $resultSet2["user_one"];
+					$resultSet["friendship"] = $resultSet2["state"];
+			}
+			else {
+				$resultSet["friendship"] = -1;				
+			}
+
+			
+			return $resultSet;
+			
+		}
+		else {
+			return null;
+		}
+		$friends = array();
+
+		foreach ($resultSet as $result) {
+
+			$friend = new \stdClass();
+			
+			if($result["u1_id"] != $this->user_id) {
+				
+				$friend->{"id"} = $result["u1_id"];
+				$friend->{"real_name"} = $result["u1_real_name"];
+				
+			}
+			else {
+				
+				$friend->{"id"} = $result["u2_id"];
+				$friend->{"real_name"} = $result["u2_real_name"];
+				
+			}
+			
+			return $friend;
+			
+		}
+
      }
 	 
-     public function getRequests()
+     public function getInvitations()
      {
 		 
 		$select = new Select;
@@ -267,7 +347,9 @@ GROUP BY u.id*/
 		$select->where($where);
 
 		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_real_name' => 'real_name', 'u1_id' => 'id'));     
-		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_real_name' => 'real_name', 'u2_id' => 'id'));     
+		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_real_name' => 'real_name', 'u2_id' => 'id'));   
+
+		
 		
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
 		$resultSet = $statement->execute();	

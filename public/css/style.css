@@ -4,10 +4,11 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 	font-family: 'Raleway', sans-serif;
+	background: #eceff1;
 }
 
-h1 {
-	border-bottom: 3px solid #607d8b;
+h6 {
+	border-bottom: 1px solid #ddd;
 }
 .zf-green {
     color: #68b604;
@@ -71,9 +72,10 @@ footer {
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
+	border-color: #ddd;
     border-radius: 3px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .bs-callout h4 {
     margin-top: 0;
@@ -95,7 +97,7 @@ footer {
     color: #777;
 }
 .bs-callout-primary {
-    border-left-color: #009688;
+	border-top: 5px solid #009688;
 }
 .bs-callout-primary h4 {
     color: #009688;
@@ -107,7 +109,7 @@ footer {
     color: #5cb85c;
 }
 .bs-callout-danger {
-    border-left-color: #d9534f;
+	border-top: 5px solid #d9534f;
 }
 .bs-callout-danger h4 {
     color: #d9534f;
@@ -137,6 +139,11 @@ footer {
   
 }
 
+#map {
+	overflow:hidden;
+	
+}
+
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
@@ -146,7 +153,10 @@ footer {
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 300px;
-  display:none;
+  opacity:0;
+  transition:opacity 0.3s;
+  position:fixed;
+  
 }
 
 #pac-input:focus {
@@ -191,4 +201,74 @@ footer {
     padding: 0 10px;
 	margin:0;
     width: 100%;
+}
+
+.tile-title {
+	
+	font-size: 24px;
+	
+	padding: 0 0 0;
+	margin-bottom: 4px;
+	border-bottom:1px solid #ddd;
+	
+}
+
+.tile-comment {
+	
+	font-size: 18px;
+	
+	padding: 0 0 0;
+	margin: 8px 0;
+	
+}
+
+.tile-address {
+	
+	font-size: 16px;
+	
+	padding: 0 0 0;
+	margin: 8px 0 0;
+	
+}
+
+.tile-mine:hover  .tile-mark{	
+	color: white;
+}
+
+.tile-mine:hover  .tile-control{	
+	opacity:1;
+}
+
+.tile-mark {
+	float:right;
+	font-size:20px;	
+	position:relative;
+	transition: color 0.3s;
+}
+
+.tile-control {
+	top:0;
+	right:0;
+	position:absolute;
+	opacity:0;
+	transition: opacity 0.3s;
+}
+
+.tile-mark div {
+	vertical-align: bottom;	
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #009688;
+    color: #fff;
+}
+
+#friendlist {
+	
+    border-left: 3px solid #009688;
+	padding: 0 5px;
+	font-size:20px;
+	font-family:"Raleway";
+	margin-top:10px;
+	
 }

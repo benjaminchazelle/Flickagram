@@ -1,0 +1,35 @@
+ <?php
+ // module/Flick/view/flick/flick/delete.phtml:
+
+ $url = $this->url('flick', array(
+     'action' => 'delete',
+     'id'     => $this->id,
+ ));
+ ?>
+ 
+
+ 
+  
+ <form action="<?php echo $url; ?>" method="post">
+
+	 <input type="hidden" name="id" value="<?php echo (int) $flick->id; ?>" />
+	 
+	 <div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h1>Supprimer un flick</h1>
+			<div class="bs-callout bs-callout-danger">
+				<div class="apanel-body"> 
+					<p>Voulez-vous supprimer votre flick 
+					 "<?php echo $this->escapeHtml($flick->name); ?>" ?
+					</p>
+				
+					<input class="btn btn-danger" type="submit"  value="Supprimer" name="del">
+					<input class="btn btn-default" type="submit"  value="Annuler" name="del">
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</form>

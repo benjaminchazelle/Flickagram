@@ -37,9 +37,11 @@
              if ($form->isValid()) {
 				 
 				$success = 0;
- 
-				 if(!is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]))) {
-				 
+				
+				$email_available = !is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]));
+				$nickname_available = !is_object($this->getSignTable()->getSignByNickname($form->getData()["real_name"]));
+
+				 if($email_available && $nickname_available) {
 				 
 					 $sign->exchangeArray($form->getData());
 					 $this->getSignTable()->saveSign($sign);
@@ -51,7 +53,7 @@
 
              }
          }
-         return array('success' => $success, 'form' => $form);
+         return array('email_available' => $email_available, 'nickname_available' => $nickname_available, 'success' => $success, 'form' => $form);
      }
 
     public function successAction() {
