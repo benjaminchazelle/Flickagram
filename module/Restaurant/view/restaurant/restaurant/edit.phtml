@@ -27,10 +27,18 @@
 
 				<div class="form-group">
 					<?php	echo $this->formElementErrors($form->get("name"), array('class' => "error")) ?>
-					<label for="field_name" class="col-sm-3 control-label">Nom</label>
+					<label for="field_name" class="col-sm-3 control-label">Titre</label>
 					<div class="col-sm-9">
 						
 						<?php	echo $this->formInput($form->get('name')); ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<?php	echo $this->formElementErrors($form->get("fileupload"), array('class' => "error")) ?>
+					<label for="field_name" class="col-sm-3 control-label">Photo</label>
+					<div class="col-sm-9">
+						
+						<?php	echo $this->formInput($form->get('fileupload')); ?>
 					</div>
 				</div>
 				<div class="form-group">
@@ -47,8 +55,9 @@
 					<div class="col-sm-9">
 
 						<div class="btn-group star-group" role="group" aria-label="...">
-							<?php	echo $this->formHidden($form->get('mark')); ?>
+							
 							<button type="button" name="1" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 1) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
+							<?php	echo $this->formHidden($form->get('mark')); ?>
 							<button type="button" name="2" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 2) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
 							<button type="button" name="3" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 3) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>
 							<button type="button" name="4" class="mark btn btn-default"> <span class="glyphicon glyphicon-star<?php echo ($form->get('mark')->getValue() < 4) ? "-empty" : ''; ?>" aria-hidden="true"></span></button>

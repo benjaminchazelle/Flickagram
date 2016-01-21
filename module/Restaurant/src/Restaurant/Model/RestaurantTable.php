@@ -48,6 +48,7 @@
          $data = array(
              'address' => $restaurant->address,
              'name'  => $restaurant->name,
+             'fileupload'  => $restaurant->fileupload,
              'comment'  => $restaurant->comment,
              'mark'  => $restaurant->mark,
              'owner'  => $this->user_id,

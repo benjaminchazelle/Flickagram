@@ -6,6 +6,7 @@
  use Zend\View\Model\ViewModel;
  use Restaurant\Model\Restaurant;          // <-- Add this import
  use Restaurant\Form\RestaurantForm;       // <-- Add this import
+use Zend\Validator\File\Size;
 
 
  class RestaurantController extends AbstractActionController
@@ -47,11 +48,53 @@
              $restaurant = new Restaurant();
 
              $form->setInputFilter($restaurant->getInputFilter());
-             $form->setData($request->getPost());
+            
+				
 			 
-             if ($form->isValid()) {var_dump($request->getPost());
-                 $restaurant->exchangeArray($form->getData());
-                 $this->getRestaurantTable()->saveRestaurant($restaurant);
+				$File    = $this->params()->fromFiles('fileupload');
+				$nonFile = $request->getPost()->toArray();
+				$data    = array_merge_recursive(
+					$this->getRequest()->getPost()->toArray(),           
+					$this->getRequest()->getFiles()->toArray()
+					);
+
+				$form->setData($data);
+			  
+             if ($form->isValid()) {
+				 
+				$adapter = new \Zend\File\Transfer\Adapter\Http(); 
+				
+			
+				$path = pathinfo($File['name']);
+				$ext = $path['extension'];
+				$filename = md5($File['name']) . "-" . time() . "." . $ext;
+				
+				$adapter->addFilter('Rename', $filename);
+				
+                if (!$adapter->isValid()){
+                    $dataError = $adapter->getMessages();
+                    $error = array();
+                    foreach($dataError as $key=>$row)
+                    {
+                        $error[] = $row;
+                    }
+                    $form->setMessages(array('fileupload'=>$error ));
+                } else {
+                    $adapter->setDestination(dirname(__DIR__).'/../../../../public/assets');
+                    // $adapter->setDestination('.');
+                    if ($adapter->receive($File['name'])) {
+						
+						$d = $form->getData();
+						$d["fileupload"] = $filename;
+						// var_dump($d);
+						// exit;
+                        $restaurant->exchangeArray($d);
+						$this->getRestaurantTable()->saveRestaurant($restaurant);
+
+                    }
+                }  
+                 // $restaurant->exchangeArray($form->getData());
+                 
 
                  // Redirect to list of restaurants
                  return $this->redirect()->toRoute('restaurant');

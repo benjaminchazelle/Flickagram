@@ -3,6 +3,10 @@
  namespace Restaurant\Form;
 
  use Zend\Form\Form;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
  class RestaurantForm extends Form
  {
@@ -11,7 +15,8 @@
          // we want to ignore the name passed
          parent::__construct('restaurant');
 		 
-
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype','multipart/form-data');
 		$this->setAttribute('class', 'form-horizontal');
 
          $this->add(array(
@@ -32,7 +37,15 @@
              ),
          ));
 		 
-		 
+        $this->add(array(
+            'name' => 'fileupload',
+            'attributes' => array(
+                'type'  => 'file',
+            ),
+            'options' => array(
+                'label' => 'File Upload',
+            ),
+        )); 
 
          $this->add(array(
              'name' => 'address',

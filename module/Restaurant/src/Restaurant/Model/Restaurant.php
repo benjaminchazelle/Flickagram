@@ -6,11 +6,15 @@
  use Zend\InputFilter\InputFilterAwareInterface;
  use Zend\InputFilter\InputFilterInterface;
 
+ 
+ use Zend\InputFilter\Factory as InputFactory;
+
  class Restaurant
  {
      public $id;
      public $address;
      public $name;
+     public $fileupload;
      public $owner;
 
      public function exchangeArray($data)
@@ -18,6 +22,7 @@
          $this->id     = (!empty($data['id'])) ? $data['id'] : null;
          $this->address = (!empty($data['address'])) ? $data['address'] : null;
          $this->name  = (!empty($data['name'])) ? $data['name'] : null;
+         $this->fileupload  = (!empty($data['fileupload'])) ? $data['fileupload'] : null;
          $this->comment  = (!empty($data['comment'])) ? $data['comment'] : null;
          $this->mark  = (!empty($data['mark'])) ? $data['mark'] : null;
          $this->owner  = (!empty($data['owner'])) ? $data['owner'] : null;
@@ -140,8 +145,13 @@
 					),
                  ),
              ));
-			 
-			 
+			$factory  = new InputFactory();
+			$inputFilter->add(
+                $factory->createInput(array(
+                    'name'     => 'fileupload',
+                    'required' => true,
+                ))
+            );
 
              $this->inputFilter = $inputFilter;
          }
