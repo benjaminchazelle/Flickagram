@@ -22,12 +22,15 @@
 	<div class="col-md-7">
 	
 		<h1>Recherche</h1>
-
-		<table class="table">
+		
 		<?php
-		if(count($users) == 0)
-			echo '<tr><td>Aucun résultat</td></tr>';
-		?>		
+		if(count($users) == 0) {
+			echo '<div class="alertblock"><img src="../img/ship.png" /><span>Personne à l\'horizon !</span><span>Votre recherche n\'a pas été fructueuse.</span></div>';
+		}
+		else {
+		?>
+
+		<table class="table">	
 		<?php foreach ($users as $user) :  ?>
 
 		<tr>
@@ -54,6 +57,7 @@
 		  
 		<?php endforeach; ?>
 		</table>
+		<?php } ?>
 		
 	</div>
 	<div class="col-md-3">

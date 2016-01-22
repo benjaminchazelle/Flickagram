@@ -88,6 +88,7 @@ use Zend\Db\Sql\Where;
 		$or->OR->equalTo( 'fr.user_two', $this->user_id );
 		$or->unnest();
 		$where->AND->equalTo( 'state', 1);
+		$where->AND->notEqualTo( 'fl.owner', $this->user_id);
 		
 		$select->where($where);
 		

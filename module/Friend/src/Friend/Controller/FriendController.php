@@ -14,14 +14,28 @@
  {
 	 public function wallAction( ) {
 		 
-		 $input = $this->params()->fromRoute('id', 0);
+		$input = $this->params()->fromRoute('id', 0);
+		  
+		 
+		$userdata = is_numeric($input) ? $this->getFriendTable()->getUserById($input) : $this->getFriendTable()->getUserByNickname($input);
+		
+		
+		$exists = is_array($userdata);
+		
+		$userflicks = array();
+		
+		if($exists) {
+			
+			if($userdata["friendship"] == 1) {
+				
+				$userflicks = $this->getFlickTable()->getFlicksByOwnerId($userdata["id"]);
+			
+			}
+			
+		}
+		
 		 
 		 
-		 
-		 $userdata = is_numeric($input) ? $this->getFriendTable()->getUserById($input) : $this->getFriendTable()->getUserByNickname($input);
-		 $userflicks = is_numeric($input) ? $this->getFlickTable()->getFlicksByOwnerId($input) : $this->getFlickTable()->getFlicksByOwnerNickname($input);
-		 
-		 $exists = is_array($userdata);
 		 
 	
 

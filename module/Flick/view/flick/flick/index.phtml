@@ -24,7 +24,11 @@
 			Les derniers flicks
 			<a class="btn btn-primary" style="float:right;" role="button" href="<?php echo $this->url('flick', array('action'=>'add'));?>">Ajouter un flick</a>
 		</h1>
-
+		<?php
+		if(count($flicks) == 0) {
+			echo '<div class="alertblock"><img src="../img/wait.png" /><span>Aucun de vos amis n\'a encore publié de flicks.</span></div>';
+		}
+		?>
 		<?php foreach ($flicks as $flick) : ?>
 
 		<div class="tile <?php if($currentUserId == $flick["owner"]) echo "tile-mine"; ?> panel panel-default">

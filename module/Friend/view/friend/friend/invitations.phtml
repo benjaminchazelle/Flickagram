@@ -22,12 +22,15 @@
 	<div class="col-md-7">
 	
 		<h1>Mes invitations</h1>
+		<?php
+		if(count($invitations) == 0) {
+			echo '<div class="alertblock"><img src="../img/ship.png" /><span>Rien en vue à l\'horizon !</span><span>Vous n\'avez aucune invitation d\'amis.</span></div>';
+		}
+		else {
+		?>
 
 		<table class="table">
-		<?php
-		if(count($invitations) == 0)
-			echo '<tr><td>Vous n\'avez aucune invitation</td></tr>';
-		?>
+
 		<?php foreach ($invitations as $invitation) : ?>
 
 		<tr>
@@ -39,6 +42,8 @@
 		
 
 		</table>
+		
+		<?php } ?>
 		
 	</div>
 	<div class="col-md-3">
