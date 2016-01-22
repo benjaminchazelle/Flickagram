@@ -23,12 +23,12 @@ use Zend\Db\Sql\Where;
      public function getFlicksByOwnerId($ownerId)
      {
 		$select = new Select;
-		$select->from(array('fl' => 'gm_flicks'));
+		$select->from(array('fl' => 'fg_flicks'));
 
 		$select->columns(array('*'));
 
 
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
+		$select->join(array('u' => 'fg_users'),	'fl.owner = u.id', array("nickname"));      
 		
 		$select->where(array("owner" => $ownerId));
 		
@@ -46,12 +46,12 @@ use Zend\Db\Sql\Where;
      public function getFlicksByOwnerNickname($ownerNickname)
      {
 		$select = new Select;
-		$select->from(array('fl' => 'gm_flicks'));
+		$select->from(array('fl' => 'fg_flicks'));
 
 		$select->columns(array('*'));
 
 
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
+		$select->join(array('u' => 'fg_users'),	'fl.owner = u.id', array("nickname"));      
 		
 		$select->where(array("nickname" => $ownerNickname));
 		
@@ -75,12 +75,12 @@ use Zend\Db\Sql\Where;
 	 public  function getTimeline() {
 		 
 		$select = new Select;
-		$select->from(array('fl' => 'gm_flicks'));
+		$select->from(array('fl' => 'fg_flicks'));
 
 		$select->columns(array('*'));
 
-		$select->join(array('fr' => 'gm_friends'),	'fl.owner = fr.user_one OR fl.owner = fr.user_two', array());      
-		$select->join(array('u' => 'gm_users'),	'fl.owner = u.id', array("nickname"));      
+		$select->join(array('fr' => 'fg_friends'),	'fl.owner = fr.user_one OR fl.owner = fr.user_two', array());      
+		$select->join(array('u' => 'fg_users'),	'fl.owner = u.id', array("nickname"));      
 		
 		$where = new Where;
 		$or = $where->nest();

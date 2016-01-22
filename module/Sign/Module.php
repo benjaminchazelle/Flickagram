@@ -45,7 +45,7 @@ use Zend\Db\TableGateway\TableGateway;
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
                      $resultSetPrototype->setArrayObjectPrototype(new Sign());
-                     return new TableGateway('gm_users', $dbAdapter, null, $resultSetPrototype);
+                     return new TableGateway('fg_users', $dbAdapter, null, $resultSetPrototype);
                  },
              ),
          );

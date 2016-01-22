@@ -54,7 +54,7 @@ class Module implements AutoloaderProviderInterface
 
         'AuthService' => function ($sm) {
             $dbAdapter      = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'gm_users','email','password', 'MD5(?)');
+                    $dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'fg_users','email','password', 'MD5(?)');
 
             $authService = new AuthenticationService();
             $authService->setAdapter($dbTableAuthAdapter);

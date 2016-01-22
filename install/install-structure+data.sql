@@ -136,7 +136,7 @@ ALTER TABLE `fg_flicks`
 --
 ALTER TABLE `fg_friends`
   ADD UNIQUE KEY `user_one` (`user_one`,`user_two`),
-  ADD KEY `gm_friends_ibfk_2` (`user_two`);
+  ADD KEY `fg_friends_ibfk_2` (`user_two`);
 
 --
 -- Index pour la table `fg_users`

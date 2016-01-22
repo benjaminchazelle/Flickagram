@@ -41,20 +41,20 @@ use Zend\Db\Sql\Where;
 	 
 	 public function searchByNickname($name) {
 		 /*
-SELECT id, nickname, MAX(state) 'friendship' FROM gm_users u
-LEFT JOIN gm_friends f ON u.id = f.user_one OR u.id = f.user_two
+SELECT id, nickname, MAX(state) 'friendship' FROM fg_users u
+LEFT JOIN fg_friends f ON u.id = f.user_one OR u.id = f.user_two
 WHERE UCASE(nickname) LIKE "%LI%"
 GROUP BY u.id*/
 
 		$select = new Select;
 
 // $subSelect = new Select();
-		$select->from(array('u' => 'gm_users'))->columns(array('id', 'nickname'));
+		$select->from(array('u' => 'fg_users'))->columns(array('id', 'nickname'));
 
-		// $select->from(array('u' => 'gm_users'), array('MAX(state)', 'UCASE(nickname)') );
+		// $select->from(array('u' => 'fg_users'), array('MAX(state)', 'UCASE(nickname)') );
 		// $select->columns(array('id' => 'id', 'nickname' => 'nickname', 'friendship' => 'friendship'));
 		
-		// $select->join(array('f' => 'gm_friends'),	'u.id = f.user_one OR u.id = f.user_two', array(), 'inner');   
+		// $select->join(array('f' => 'fg_friends'),	'u.id = f.user_one OR u.id = f.user_two', array(), 'inner');   
 
 
 		$where = new Where;
@@ -85,7 +85,7 @@ GROUP BY u.id*/
 					 
 					 //insert
 				
-					$insert = new Insert('gm_friends');
+					$insert = new Insert('fg_friends');
 					$newData = array(
 					'user_one'=> $this->user_id,
 					'user_two'=> $id,
@@ -101,7 +101,7 @@ GROUP BY u.id*/
 					 
 					 //update
 				
-					$update = new Update('gm_friends');
+					$update = new Update('fg_friends');
 					$newData = array(
 					'state'=> '1'
 					);
@@ -124,7 +124,7 @@ GROUP BY u.id*/
      {
 		 
 		$select = new Select;
-		$select->from(array('u' => 'gm_users'));
+		$select->from(array('u' => 'fg_users'));
 
 		$select->columns(array('id', 'nickname', 'email'));
 		
@@ -140,7 +140,7 @@ GROUP BY u.id*/
 		if(is_array($resultSet)) {
 			
 			$select = new Select;
-			$select->from(array('f' => 'gm_friends'));
+			$select->from(array('f' => 'fg_friends'));
 			
 			$select->columns(array('*'));
 			
@@ -203,7 +203,7 @@ GROUP BY u.id*/
      {
 		 
 		$select = new Select;
-		$select->from(array('u' => 'gm_users'));
+		$select->from(array('u' => 'fg_users'));
 
 		$select->columns(array('id', 'nickname', 'email'));
 		
@@ -221,7 +221,7 @@ GROUP BY u.id*/
 		if(is_array($resultSet)) {
 			
 			$select = new Select;
-			$select->from(array('f' => 'gm_friends'));
+			$select->from(array('f' => 'fg_friends'));
 			
 			$select->columns(array('*'));
 			
@@ -285,7 +285,7 @@ GROUP BY u.id*/
      {
 		 
 		$select = new Select;
-		$select->from(array('f' => 'gm_friends'));
+		$select->from(array('f' => 'fg_friends'));
 
 		$select->columns(array('*'));
 		
@@ -297,8 +297,8 @@ GROUP BY u.id*/
 		
 		$select->where($where);
 
-		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
-		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));     
+		$select->join(array('u1' => 'fg_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
+		$select->join(array('u2' => 'fg_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));     
 		
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
 		$resultSet = $statement->execute();	
@@ -333,7 +333,7 @@ GROUP BY u.id*/
      {
 		 
 		$select = new Select;
-		$select->from(array('f' => 'gm_friends'));
+		$select->from(array('f' => 'fg_friends'));
 
 		$select->columns(array('*'));
 		
@@ -346,8 +346,8 @@ GROUP BY u.id*/
 		
 		$select->where($where);
 
-		$select->join(array('u1' => 'gm_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
-		$select->join(array('u2' => 'gm_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));   
+		$select->join(array('u1' => 'fg_users'),	'f.user_one = u1.id', array('u1_nickname' => 'nickname', 'u1_id' => 'id'));     
+		$select->join(array('u2' => 'fg_users'),	'f.user_two = u2.id', array('u2_nickname' => 'nickname', 'u2_id' => 'id'));   
 
 		
 		

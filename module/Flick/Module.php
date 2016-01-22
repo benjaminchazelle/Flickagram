@@ -45,7 +45,7 @@ use Zend\Db\TableGateway\TableGateway;
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
                      $resultSetPrototype->setArrayObjectPrototype(new Flick());
-                     return new TableGateway('gm_flicks', $dbAdapter, null, $resultSetPrototype);
+                     return new TableGateway('fg_flicks', $dbAdapter, null, $resultSetPrototype);
                  },
                  'Friend\Model\FriendTable' =>  function($sm) {
                      $tableGateway = $sm->get('FriendTableGateway');
@@ -56,7 +56,7 @@ use Zend\Db\TableGateway\TableGateway;
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
                      $resultSetPrototype->setArrayObjectPrototype(new Friend());
-                     return new TableGateway('gm_friends', $dbAdapter, null, $resultSetPrototype);
+                     return new TableGateway('fg_friends', $dbAdapter, null, $resultSetPrototype);
                  },
              ),
          );
