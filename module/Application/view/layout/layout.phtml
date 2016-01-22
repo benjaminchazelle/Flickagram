@@ -40,10 +40,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
 
-						<?php if(!$hasIdentity && $this->url() == "/auth") { ?>
+						<?php if(!$hasIdentity && strpos($this->url(), "auth") !== false) { ?>
                         <li class="active"><a href="<?php echo $this->url('sign') ?>"><?php echo $this->translate('S\'inscrire') ?></a></li>
 						<?php } ?>
-						<?php if(!$hasIdentity && $this->url() == "/sign") { ?>
+						<?php if(!$hasIdentity && strpos($this->url(), "sign") !== false) { ?>
                         <li class="active"><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Se connecter') ?></a></li>
 						<?php } ?>
 						<?php if($hasIdentity) { ?>
@@ -51,7 +51,7 @@
                         <li class="active"><a href="<?php echo $this->url('invitations') ?>"><?php echo $this->translate('Mes invitations') ?></a></li>
 						<?php } ?>
 						<?php if($hasIdentity) { ?>
-                        <li class="active"><a href="/auth/logout"><?php echo $this->translate('Déconnexion') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Déconnexion') ?></a></li>
 						<?php } ?>
 				 </ul>
                 </div><!--/.nav-collapse -->

@@ -13,13 +13,13 @@
 		<ul class="nav nav-pills nav-stacked">
 			<?php
 			if($exists)
-				echo ' <li role="presentation" class="active"><a href="/user/' . $user["nickname"]. '">@' . $user["nickname"] . '</a></li>';
+				echo ' <li role="presentation" class="active"><a href="../user/' . $user["nickname"]. '">@' . $user["nickname"] . '</a></li>';
 			else
 				echo ' <li role="presentation" class="active"><a href="">Utilisateur inconnu</a></li>';
 			?>
 
-		  <li role="presentation"><a href="/">Timeline</a></li>
-		  <li role="presentation"><a href="/me">Vos flicks</a></li>
+		  <li role="presentation"><a href="../">Timeline</a></li>
+		  <li role="presentation"><a href="../me">Vos flicks</a></li>
 		</ul>
 		
 	
@@ -101,7 +101,7 @@
 
 				</div>
 				<div class="tile-comment"><?php echo $this->escapeHtml($flick["comment"]);?></div>				
-				<img style="width:100%;" src="/assets/<?php echo $this->escapeHtml($flick["fileupload"]);?>" class="img-responsive" alt="Responsive image" />
+				<img style="width:100%;" src="../assets/<?php echo $this->escapeHtml($flick["fileupload"]);?>" class="img-responsive" alt="Responsive image" />
 				<?php echo !is_null($flick["address"]) ? '<div class="tile-address"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>À ' . $this->escapeHtml($flick["address"]).'</div>' : "";?>
 
 
@@ -116,7 +116,7 @@
 
 				<h1>Mes amis </h1>
 
-				<form class="form-inline" method="POST" name="friend" action="/search" id="friend">
+				<form class="form-inline" method="POST" name="friend" action="../search" id="friend">
 					<div class="form-group">
 						<input type="text" name="name" class="form-control" id="exampleInputEmail3" value="<?php echo ($searchterm === 0) ? "" : $searchterm; ?>" placeholder="Chercher quelqu'un">
 					</div>

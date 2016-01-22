@@ -17,6 +17,9 @@
 
 		 $success = -1;
 		 
+		 $email_available = true;
+		 $nickname_available = true;
+		 
          $form = new SignForm();
 
 

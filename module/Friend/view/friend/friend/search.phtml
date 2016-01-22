@@ -11,9 +11,9 @@
 		<h1>&nbsp;</h1>
 		
 		<ul class="nav nav-pills nav-stacked">
-		  <li role="presentation" class="active"><a href="/invitation">Recherche</a></li>
-		  <li role="presentation"><a href="/">Timeline</a></li>
-		  <li role="presentation"><a href="/me">Vos flicks</a></li>
+		  <li role="presentation" class="active"><a href="">Recherche</a></li>
+		  <li role="presentation"><a href="./">Timeline</a></li>
+		  <li role="presentation"><a href="./me">Vos flicks</a></li>
 		</ul>
 		
 	
@@ -36,15 +36,15 @@
 					if($user["friendship"] == 0)
 						echo "@" . $user["nickname"];
 					else
-						echo '<a href="/user/'.$user["nickname"].'">@'.$user["nickname"].'</a>';
+						echo '<a href="./user/'.$user["nickname"].'">@'.$user["nickname"].'</a>';
 				?>
 			</td>
 			<td>
 				<?php 
 					if($user["friendship"] == 0)
-						echo '<a class="btn btn-primary" href="/friend/add/'. $user["id"] .'" role="button" style="float:right;">Ajouter aux amis</a>';
+						echo '<a class="btn btn-primary" href="../friend/add/'. $user["id"] .'" role="button" style="float:right;">Ajouter aux amis</a>';
 					else
-						echo '<a class="btn btn-primary" href="/user/'. $user["nickname"] .'" role="button" style="float:right;">Voir le profil</a>';
+						echo '<a class="btn btn-primary" href="../user/'. $user["nickname"] .'" role="button" style="float:right;">Voir le profil</a>';
 				?>
 				
 			
@@ -61,7 +61,7 @@
 				<h1>Mes amis </h1>
 
 
-				<form class="form-inline" method="POST" name="friend" action="/search" id="friend">
+				<form class="form-inline" method="POST" name="friend" action="./search" id="friend">
 					<div class="form-group">
 						<input type="text" name="name" class="form-control" id="exampleInputEmail3" value="<?php echo ($searchterm === 0) ? "" : $searchterm; ?>" placeholder="Chercher quelqu'un">
 					</div>

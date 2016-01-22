@@ -36,6 +36,33 @@ return array(
                     ),
                 ),
             ),
+			
+            'logout' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/logout',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'SanAuth\Controller',
+                        'controller'    => 'Auth',
+                        'action'        => 'logout',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'process' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:action]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
 
             'success' => array(
                 'type'    => 'Literal',
