@@ -29,12 +29,16 @@
 		else {
 		?>
 
-		<table class="table">
+		<table class="table usergrid">
 
 		<?php foreach ($invitations as $invitation) : ?>
 
 		<tr>
-			<td>@<?php echo $invitation->nickname; ?></td>
+			<td>
+				<?php 
+					echo '<a href="./user/'.$invitation->nickname.'">@'.$invitation->nickname.'</a>';
+				?>
+			</td>
 			<td><a class="btn btn-primary" href="./friend/add/<?php echo $invitation->id; ?>" role="button" style="float:right;">Ajouter aux amis</a></td>
 		</tr>
 		  

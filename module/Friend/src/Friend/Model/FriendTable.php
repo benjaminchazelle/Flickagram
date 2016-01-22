@@ -49,13 +49,13 @@ GROUP BY u.id*/
 		$select = new Select;
 
 // $subSelect = new Select();
-		$select->from(array('u' => 'gm_users'))->columns(array('id', 'nickname', 'friendship' => new Expression('MAX(state)')));
+		$select->from(array('u' => 'gm_users'))->columns(array('id', 'nickname'));
 
 		// $select->from(array('u' => 'gm_users'), array('MAX(state)', 'UCASE(nickname)') );
-		
 		// $select->columns(array('id' => 'id', 'nickname' => 'nickname', 'friendship' => 'friendship'));
 		
-		$select->join(array('f' => 'gm_friends'),	'u.id = f.user_one OR u.id = f.user_two', array(), 'left');   
+		// $select->join(array('f' => 'gm_friends'),	'u.id = f.user_one OR u.id = f.user_two', array(), 'inner');   
+
 
 		$where = new Where;
 		$where->like( new Expression('UCASE(nickname)'), '%'.strtoupper($name).'%' );
@@ -63,7 +63,7 @@ GROUP BY u.id*/
 		
 		$select->where($where);
 		
-		$select->group('id');
+		// $select->group('id');
 		 
 		$statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
 		$resultSet = $statement->execute();	

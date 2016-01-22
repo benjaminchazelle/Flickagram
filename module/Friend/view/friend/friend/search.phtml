@@ -30,24 +30,18 @@
 		else {
 		?>
 
-		<table class="table">	
+		<table class="table usergrid">	
 		<?php foreach ($users as $user) :  ?>
 
 		<tr>
 			<td>
 				<?php 
-					if($user["friendship"] == 0)
-						echo "@" . $user["nickname"];
-					else
-						echo '<a href="./user/'.$user["nickname"].'">@'.$user["nickname"].'</a>';
+					echo '<a href="./user/'.$user["nickname"].'">@'.$user["nickname"].'</a>';
 				?>
 			</td>
 			<td>
 				<?php 
-					if($user["friendship"] == 0)
-						echo '<a class="btn btn-primary" href="../friend/add/'. $user["id"] .'" role="button" style="float:right;">Ajouter aux amis</a>';
-					else
-						echo '<a class="btn btn-primary" href="../user/'. $user["nickname"] .'" role="button" style="float:right;">Voir le profil</a>';
+					echo '<a class="btn btn-primary" href="../user/'. $user["nickname"] .'" role="button" style="float:right;">Voir le profil</a>';
 				?>
 				
 			

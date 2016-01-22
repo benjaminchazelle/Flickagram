@@ -36,7 +36,13 @@ If you use Apache server, add a virtual host at the end of the httpd.conf, it sh
 
 ### SQL installation
 
-Import the install/install.sql script in your database.
+SQL scripts are available in install direcotry.
+
+You can import in your database the minimal SQL structure by choosing install-structure.sql
+
+Nevertheless, demonstration accounts and flicks are pre filled in the install-structure+data.sql     <--- Monsieur prenez ce fichier
+
+Import the script you've choosed in your database.
 
 ### Database connection configuration
 
@@ -45,13 +51,8 @@ Set the database connection informations (host, schema, username, password) by e
 
 ### Let's play !
 
-By default, you can log to the application with :
+By default if you have installed install-structure+data.sql file, you can log to the application with :
 
-    username:    alice@yopmail.com
-    password:    alice
-	
-	or
-	
-    username:    bob@yopmail.com
-    password:    bob
+    username:    alice@mail.com, bob@mail.com, charles@mail.com, derik@mail.com, elise@mail.com, or fabrice@mail.com
+    password:    aqwzsx
 	
