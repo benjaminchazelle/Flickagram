@@ -40,19 +40,19 @@
 					switch($user["friendship"]){
 						
 						case -1:
-							echo "<a class=\"btn btn-primary\" href=\"http://zend.localhost/friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Ajouter aux amis</a>";
+							echo "<a class=\"btn btn-primary\" href=\"../friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Ajouter aux amis</a>";
 							break;
 						case 0:
 							if($user["i_am_adder"]){
-								echo "<a class=\"btn btn-primary\" href=\"http://zend.localhost/friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Demande envoyée</a>";
+								echo "<a class=\"btn btn-primary\" href=\"./friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Demande envoyée</a>";
 							}
 							else{
-								echo "<a class=\"btn btn-primary\" href=\"http://zend.localhost/friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Accepter la demande d'amis</a>";
+								echo "<a class=\"btn btn-primary\" href=\"../friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Accepter la demande d'amis</a>";
 							}
 							
 							break;
 						case 1:
-							echo "<a class=\"btn btn-primary\" href=\"http://zend.localhost/friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Vous êtes amis</a>";
+							echo "<a class=\"btn btn-primary\" href=\"../friend/add/".$user["id"]."\" role=\"button\" style=\"float:right;\">Vous êtes amis</a>";
 							break;
 						
 					}

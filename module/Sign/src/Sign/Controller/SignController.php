@@ -41,6 +41,10 @@
 				 
 				$success = 0;
 				
+				$alnum = new \Zend_Validate_Alnum();
+var_dump($request->getPost());exit;
+				//$alnum->isValid( $value )
+				
 				$email_available = !is_object($this->getSignTable()->getSignByEmail($form->getData()["email"]));
 				$nickname_available = !is_object($this->getSignTable()->getSignByNickname($form->getData()["nickname"]));
 

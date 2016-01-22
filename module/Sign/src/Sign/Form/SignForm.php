@@ -60,7 +60,7 @@
 			'attributes' => array(
 				'id'  => 'exampleInputNom',
 				'class'  => 'form-control',
-				'placeholder'  => 'Nom',
+				'placeholder'  => 'Pseudo',
 			),
          ));
          $this->add(array(
