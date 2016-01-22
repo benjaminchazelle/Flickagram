@@ -237,6 +237,7 @@ footer {
 
 .tile-mine:hover  .tile-control{	
 	opacity:1;
+	display:block;
 }
 
 .tile-mark {
@@ -252,6 +253,7 @@ footer {
 	position:absolute;
 	opacity:0;
 	transition: opacity 0.3s;
+	display:none;
 }
 
 .tile-mark div {
@@ -272,3 +274,4 @@ footer {
 	margin-top:10px;
 	
 }
+
